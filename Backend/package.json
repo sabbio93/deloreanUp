@@ -9,6 +9,13 @@
     "lint": "neutrino lint",
     "test": "neutrino test"
   },
+  "dependencies":{
+     "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "http-errors": "~1.6.2",
+    "pug": "",
+    "morgan": "~1.9.0"
+  },
   "devDependencies": {
     "@neutrinojs/jest": "^8.3.0",
     "@neutrinojs/node": "^8.3.0",
