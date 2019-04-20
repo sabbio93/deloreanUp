@@ -11,6 +11,7 @@
     "docs": "jsdoc -r -c config/jsdoc-config.json"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "http-errors": "~1.6.2",
