@@ -1,9 +1,8 @@
 import DocNode from '../../model/DocNode'
 
 const docNodes = [
-  new DocNode('192.168.1.1', 80),
-  new DocNode('192.168.1.2', 80),
-  new DocNode('192.168.1.3', 100)
+  new DocNode('127.0.0.1', 5555),
+  new DocNode('192.168.0.13', 5555)
 ]
 
 function getAllNodes () {
