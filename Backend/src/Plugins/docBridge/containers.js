@@ -1,4 +1,4 @@
-import { ContainerApi } from 'deamon_backup_api'
+import { ContainerApi } from 'doc-node-client'
 
 const basePath = '/api/v1.0.0'
 
