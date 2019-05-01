@@ -16,4 +16,18 @@ router.get('/', docNodesController.getAllNodeList)
  */
 router.get('/:nodeId/containers', docNodesController.getNodeContainers)
 
+/**
+ * @route   GET api/<version>/nodes/{nodeId}/containers/{containerId}
+ * @desc    Return a container object
+ * @access  Private
+ */
+router.get('/:nodeId/containers/:containerId', docNodesController.getNodeContainerById)
+
+/**
+ * @route   GET api/<version>/nodes/{nodeId}/containers/{containerId}/mounts
+ * @desc    Return an array of mounts object
+ * @access  Private
+ */
+router.get('/:nodeId/containers/:containerId/mounts', docNodesController.getNodeContainerMounts)
+
 module.exports = router
