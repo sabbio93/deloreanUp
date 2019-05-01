@@ -17,7 +17,7 @@ const getAllNodeList = (req, res, next) => {
   baseController.successResponse(res, { nodes: getAllNodes() })
 }
 
-const getNodeContainersList = (req, res, next) => {
+const getNodeContainers = (req, res, next) => {
   const nodeId = req.params.nodeId
   if (!nodeId) {
     return baseController.errorResponse(res, 400, 'Bad request. Node ID is required and must be a string')
@@ -27,11 +27,11 @@ const getNodeContainersList = (req, res, next) => {
     return baseController.errorResponse(res, 404, 'A node with the specified ID was not found')
   }
   docBridgeContainers.getContainersList(node)
-    .then(response => baseController.successResponse(res, { containers: response.data.containers }))
+    .then(response => baseController.successResponse(res, response))
     .catch(err => next(err))
 }
 
 export {
   getAllNodeList,
-  getNodeContainersList
+  getNodeContainers
 }

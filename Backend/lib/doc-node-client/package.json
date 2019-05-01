@@ -1,0 +1,21 @@
+{
+  "name": "deamon_backup_api",
+  "version": "1.0.0",
+  "description": "Deamon_used_to_periodically_generate_volumes_backup_and_send_of_this_backups",
+  "license": "Unlicense",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --recursive"
+  },
+  "browser": {
+    "fs": false
+  },
+  "dependencies": {
+    "superagent": "3.7.0"
+  },
+  "devDependencies": {
+    "mocha": "~2.3.4",
+    "sinon": "1.17.3",
+    "expect.js": "~0.3.1"
+  }
+}
