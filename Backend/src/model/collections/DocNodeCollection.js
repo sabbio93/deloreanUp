@@ -8,7 +8,7 @@ import * as staticCode from 'Plugins/DocNodesFinder/staticCode'
  * Method to retrive the configured plugins to find the nodes
  * @return {Array} - return an array of plugin
  */
-const getConfiguredPlugins = () => {
+function getConfiguredPlugins () {
   return [staticCode]
 }
 
@@ -16,7 +16,7 @@ const getConfiguredPlugins = () => {
  * Method to get all the nodes available from the configured plugins
  * @return {Array<Object>} - return an array of {@link DocNode} object
  */
-const getAllNodes = () => {
+function getAllNodes () {
   const nodes = []
   getConfiguredPlugins().map(plugin => plugin.getAllNodes().map(node => nodes.push(node)))
   return nodes
@@ -27,7 +27,7 @@ const getAllNodes = () => {
  * @param {string} id - id of the node to search
  * @return {*} - return the {@link DocNode} object if the id exist, otherwise null
  */
-const getNodeById = (id) => {
+function getNodeById (id) {
   const nodes = getAllNodes()
   const node = nodes.filter(node => node.id === id)
   if (node.length === 0) {

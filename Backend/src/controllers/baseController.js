@@ -7,7 +7,7 @@
  * @param {Object} res - the response object to use to send the error
  * @param {Object} response - a generic json object to return as response body
  */
-const successResponse = (res, response) => {
+function successResponse (res, response) {
   res.status(200).json(response)
 }
 
@@ -18,7 +18,7 @@ const successResponse = (res, response) => {
  * @param {string} message - the message of the error
  * module:Controllers/baseController~errorResponse
  */
-const errorResponse = (res, code, message) => {
+function errorResponse (res, code, message) {
   res.status(code).json({
     code,
     message

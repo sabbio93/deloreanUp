@@ -2,18 +2,36 @@ import * as baseController from 'controllers/baseController'
 import * as docNodeCollection from 'model/collections/DocNodeCollection'
 import * as docBridgeContainers from 'Plugins/docBridge/containers'
 
-const getAllNodeList = (req, res, next) => {
+/**
+ * Method to retrive the list of all doc-nodes available
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @param {function} next - the next middleware function
+ */
+function getAllNodeList (req, res, next) {
   baseController.successResponse(res, { nodes: docNodeCollection.getAllNodes() })
 }
 
-const getNodeContainers = (req, res, next) => {
+/**
+ * Method to retrive the list of container objects in a specific doc-node
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @param {function} next - the next middleware function
+ */
+function getNodeContainers (req, res, next) {
   const node = getNodeByParams(req, res, next)
   docBridgeContainers.getContainersList(node)
     .then(response => handleApiResponse(res, response))
     .catch(err => next(err))
 }
 
-const getNodeContainerById = (req, res, next) => {
+/**
+ * Method to retrive a specific container object in a specific doc-node
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @param {function} next - the next middleware function
+ */
+function getNodeContainerById (req, res, next) {
   const node = getNodeByParams(req, res, next)
   const containerId = req.params.containerId
   if (!containerId) {
@@ -24,7 +42,13 @@ const getNodeContainerById = (req, res, next) => {
     .catch(err => next(err))
 }
 
-const getNodeContainerMounts = (req, res, next) => {
+/**
+ * Method to retrive the list of mounts of a specific container in a specific doc-node
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @param {function} next - the next middleware function
+ */
+function getNodeContainerMounts (req, res, next) {
   const node = getNodeByParams(req, res, next)
   const containerId = req.params.containerId
   if (!containerId) {
@@ -35,7 +59,13 @@ const getNodeContainerMounts = (req, res, next) => {
     .catch(err => next(err))
 }
 
-const postNodeContainerBackup = (req, res, next) => {
+/**
+ * Method to create backup of the mounts of a specific container in a specific doc-node
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @param {function} next - the next middleware function
+ */
+function postNodeContainerBackup (req, res, next) {
   const node = getNodeByParams(req, res, next)
   const containerId = req.params.containerId
   if (!containerId) {
@@ -53,7 +83,7 @@ const postNodeContainerBackup = (req, res, next) => {
  * @param {function} next - the next middleware function
  * @return {Object} - return a {@link DocNode} object otherwise an error response if the ID not exist
  */
-const getNodeByParams = (req, res, next) => {
+function getNodeByParams (req, res, next) {
   const nodeId = req.params.nodeId
   if (!nodeId) {
     return baseController.errorResponse(res, 400, 'Bad request. Node ID is required and must be a string')
@@ -72,7 +102,7 @@ const getNodeByParams = (req, res, next) => {
  *  - `success` boolean that is true if there are not errors, otherwise false
  *  - `data` an object containing the response data in case of success, otherwise contain an object with `code` and `message` of the error
  */
-const handleApiResponse = (res, response) => {
+function handleApiResponse (res, response) {
   if (response.success) {
     return baseController.successResponse(res, response.data)
   } else {

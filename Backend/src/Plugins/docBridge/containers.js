@@ -20,7 +20,7 @@ const specialErrorStatus = [
  * @param {DocNode} node - {@link DocNode} object
  * @returns {Promise} - promise of the get response, resolved with the list and rejected in case of errors
  */
-const getContainersList = (node) => {
+function getContainersList (node) {
   return new Promise((resolve, reject) => {
     const containerApi = new ContainerApi()
 
@@ -40,7 +40,7 @@ const getContainersList = (node) => {
  * @param {string} containerId - container id
  * @return {Promise} - promise of the get response, resolved with the container object and rejected in case of errors
  */
-const getContainerById = (node, containerId) => {
+function getContainerById (node, containerId) {
   return new Promise((resolve, reject) => {
     const containerApi = new ContainerApi()
 
@@ -60,7 +60,7 @@ const getContainerById = (node, containerId) => {
  * @param {string} containerId - container id
  * @return {Promise} - promise of the get response, resolved with the container object and rejected in case of errors
  */
-const getContainerMounts = (node, containerId) => {
+function getContainerMounts (node, containerId) {
   return new Promise((resolve, reject) => {
     const containerApi = new ContainerApi()
 
@@ -81,7 +81,7 @@ const getContainerMounts = (node, containerId) => {
  * @param {string} containerId - container id
  * @return {Promise} - promise of the post response, resolved with the array of backup objects and rejected in case of errors
  */
-const postContainerBackup = (node, containerId) => {
+function postContainerBackup (node, containerId) {
   return new Promise((resolve, reject) => {
     const containerApi = new ContainerApi()
 
@@ -106,7 +106,7 @@ const postContainerBackup = (node, containerId) => {
  *  - `data` an object containing the response data in case of success, otherwise contain an object with `code` and `message` of the error
  *  rejected otherwise
  */
-const handleApiResponse = (err, data, response) => {
+function handleApiResponse (err, data, response) {
   return new Promise((resolve, reject) => {
     const responseObject = {
       success: true,
