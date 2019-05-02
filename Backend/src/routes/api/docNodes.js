@@ -30,4 +30,11 @@ router.get('/:nodeId/containers/:containerId', docNodesController.getNodeContain
  */
 router.get('/:nodeId/containers/:containerId/mounts', docNodesController.getNodeContainerMounts)
 
+/**
+ * @route   POST api/<version>/nodes/{nodeId}/containers/{containerId}/backup
+ * @desc    Return an array of mounts object
+ * @access  Private
+ */
+router.post('/:nodeId/containers/:containerId/backup', docNodesController.postNodeContainerBackup)
+
 module.exports = router

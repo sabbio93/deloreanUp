@@ -16,7 +16,7 @@ const specialErrorStatus = [
 ]
 
 /**
- * Method to call inside a node the route `/api/{version}/containers` that return the list of active containers
+ * Method to call inside a node the GET route `/api/{version}/containers` that return the list of active containers
  * @param {DocNode} node - {@link DocNode} object
  * @returns {Promise} - promise of the get response, resolved with the list and rejected in case of errors
  */
@@ -35,7 +35,7 @@ const getContainersList = (node) => {
 }
 
 /**
- * Method to call inside a node the route `/api/{version}/containers/{id}` that return a container
+ * Method to call inside a node the GET route `/api/{version}/containers/{id}` that return a container
  * @param {DocNode} node - {@link DocNode} object
  * @param {string} containerId - container id
  * @return {Promise} - promise of the get response, resolved with the container object and rejected in case of errors
@@ -55,7 +55,7 @@ const getContainerById = (node, containerId) => {
 }
 
 /**
- * Method to call inside a node the route `/api/{version}/containers/{id}/mounts` that return a container's mounts object
+ * Method to call inside a node the GET route `/api/{version}/containers/{id}/mounts` that return a container's mounts object
  * @param {DocNode} node - {@link DocNode} object
  * @param {string} containerId - container id
  * @return {Promise} - promise of the get response, resolved with the container object and rejected in case of errors
@@ -67,6 +67,27 @@ const getContainerMounts = (node, containerId) => {
     containerApi.apiClient.basePath = node.getUrl() + basePath
 
     containerApi.containerMountsGET(containerId, (err, data, response) => {
+      handleApiResponse(err, data, response)
+        .then(resolve)
+        .catch(reject)
+    })
+  })
+}
+
+/**
+ * Method to call inside a node the POST route `/api/{version}/containers/{id}/backup` that return an array of backup objects
+ * (for additional reference see doc-node documentation)
+ * @param {DocNode} node - {@link DocNode} object
+ * @param {string} containerId - container id
+ * @return {Promise} - promise of the post response, resolved with the array of backup objects and rejected in case of errors
+ */
+const postContainerBackup = (node, containerId) => {
+  return new Promise((resolve, reject) => {
+    const containerApi = new ContainerApi()
+
+    containerApi.apiClient.basePath = node.getUrl() + basePath
+
+    containerApi.containerBackupPOST(containerId, (err, data, response) => {
       handleApiResponse(err, data, response)
         .then(resolve)
         .catch(reject)
@@ -113,5 +134,6 @@ const handleApiResponse = (err, data, response) => {
 export {
   getContainersList,
   getContainerById,
-  getContainerMounts
+  getContainerMounts,
+  postContainerBackup
 }

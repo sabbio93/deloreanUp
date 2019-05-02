@@ -35,6 +35,17 @@ const getNodeContainerMounts = (req, res, next) => {
     .catch(err => next(err))
 }
 
+const postNodeContainerBackup = (req, res, next) => {
+  const node = getNodeByParams(req, res, next)
+  const containerId = req.params.containerId
+  if (!containerId) {
+    return baseController.errorResponse(res, 400, 'Bad request. Container ID is required and must be a string')
+  }
+  docBridgeContainers.postContainerBackup(node, containerId)
+    .then(response => handleApiResponse(res, response))
+    .catch(err => next(err))
+}
+
 /**
  * Method that check if the nodeId param exists in the request and if a node with that ID exist
  * @param {Object} req - the request object
@@ -73,5 +84,6 @@ export {
   getAllNodeList,
   getNodeContainers,
   getNodeContainerById,
-  getNodeContainerMounts
+  getNodeContainerMounts,
+  postNodeContainerBackup
 }
