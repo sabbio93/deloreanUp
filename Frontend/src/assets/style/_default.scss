@@ -1,0 +1,38 @@
+
+html, body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+
+.app {
+  text-align: center;
+
+  .header {
+    position: relative;
+
+    .header-title, .header-logo {
+      display: inline-block;
+    }
+
+    .header-title {
+      margin-left: 88px;
+    }
+
+    .header-logo {
+      width: 64px;
+      margin-right: 24px;
+      position: absolute;
+      top: calc(50% - 34px);
+    }
+  }
+
+  .btn-secondary {
+    margin-left: 24px;
+    @include mdc-button-filled-accessible($mdc-theme-secondary)
+  }
+}
+
+h1 {
+  color: $mdc-theme-primary;
+}
