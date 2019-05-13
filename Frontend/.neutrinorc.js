@@ -9,6 +9,9 @@ module.exports = {
     root: __dirname,
   },
   use: [
+    (neutrino) => {
+      neutrino.config.merge({amd: false})
+    },
     standard({
       eslint: {
         baseConfig: {

@@ -17,6 +17,7 @@
     "@material/react-material-icon": "^0.12.0",
     "@material/react-typography": "^0.12.0",
     "css-loader": "^2.1.1",
+    "delorean-up-api": "^1.0.0",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
