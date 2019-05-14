@@ -1061,7 +1061,7 @@
   dependencies:
     html-loader "^0.5.5"
 
-"@neutrinojs/html-template@9.0.0-rc.3", "@neutrinojs/html-template@^9.0.0-rc.1":
+"@neutrinojs/html-template@9.0.0-rc.3", "@neutrinojs/html-template@^9.0.0-rc.3":
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@neutrinojs/html-template/-/html-template-9.0.0-rc.3.tgz#bc72cc3195e84335f6efe4a787b9abab7b886a18"
   integrity sha512-gQhKe1VvPt+Igzxg9NYan9uVsB27j3ybkH68DKiUCRKlLEssbumqmpVwWNt/SOBWEYumuB3WjZj2OaAG/6JQbQ==
@@ -1076,7 +1076,7 @@
     file-loader "^3.0.1"
     url-loader "^1.1.2"
 
-"@neutrinojs/jest@^9.0.0-rc.1":
+"@neutrinojs/jest@^9.0.0-rc.3":
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@neutrinojs/jest/-/jest-9.0.0-rc.3.tgz#5d4d9862f324c788ddc88d16294f8f14995f4513"
   integrity sha512-EQT60oGPJvW4j/KelMhx2bkJIbredQ9u4V5eNTnadjVQkfjNYMYKmpaKnyRhstuH+EzZH9L9gh9T5PJvpPiEJw==
@@ -1088,7 +1088,7 @@
     eslint-plugin-jest "^22.4.1"
     lodash.omit "^4.5.0"
 
-"@neutrinojs/react@^9.0.0-rc.1":
+"@neutrinojs/react@^9.0.0-rc.3":
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@neutrinojs/react/-/react-9.0.0-rc.3.tgz#1e368df4463bd50909d48be025bbcdaa160336b0"
   integrity sha512-fmbm7o1Do/3DBSJ0r4nQQMWSEXyd/sM/O6Y1V/Kn/oCx9lCMO62UXEEqVTGw8jeb/DpIbYvZnRmL0IOhfldQ1A==
@@ -1103,7 +1103,7 @@
     eslint-plugin-react "^7.12.4"
     eslint-plugin-react-hooks "^1.6.0"
 
-"@neutrinojs/standardjs@^9.0.0-rc.1":
+"@neutrinojs/standardjs@^9.0.0-rc.3":
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@neutrinojs/standardjs/-/standardjs-9.0.0-rc.3.tgz#04985886b11fd87a9ea3c4bdf683db0080d2ed01"
   integrity sha512-B+utzp38fuvJppkw+JDhROp52IHKDmNTfRKCIy4UHJjgpYQtgyfPmchc+ts4TxIQ81rb+HmmDXjlz81bsj0gSg==
@@ -1117,7 +1117,7 @@
     eslint-plugin-react "^7.12.4"
     eslint-plugin-standard "^4.0.0"
 
-"@neutrinojs/style-loader@9.0.0-rc.3", "@neutrinojs/style-loader@^9.0.0-rc.1":
+"@neutrinojs/style-loader@9.0.0-rc.3", "@neutrinojs/style-loader@^9.0.0-rc.3":
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@neutrinojs/style-loader/-/style-loader-9.0.0-rc.3.tgz#ec065d96ae5485035c13da1da3c5fa6c7ce278e5"
   integrity sha512-AawIvSN0Z/IbCwWICHvb7inqmDoO4S8VAI8ZFT6uUmW8knZ7mydi1GjXc/xwvgrfQyFmgKgss4aIrYXFnmrv2w==
@@ -5743,7 +5743,7 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
 
-neutrino@^9.0.0-rc.1:
+neutrino@^9.0.0-rc.3:
   version "9.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/neutrino/-/neutrino-9.0.0-rc.3.tgz#3428c0f3c0e77d121a43d6cecb2da2cd70712990"
   integrity sha512-B6F0I8jttqMb45o9xGq8Iue11RG3oWXHDF6/5iCDYfocHIQ4PrcChnyKnriL7xyrYq0pVzcWINIEahp55VAsYQ==
