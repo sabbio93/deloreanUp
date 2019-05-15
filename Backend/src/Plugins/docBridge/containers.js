@@ -1,4 +1,4 @@
-import { ContainerApi } from 'doc-node-client'
+import { ContainerApi } from 'doc-node-api'
 
 /**
  * This is necessary because when we update (in hard coded way) the basepath of the client api we need to append also this part to the basepathUrl

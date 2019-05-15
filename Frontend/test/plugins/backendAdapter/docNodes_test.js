@@ -1,6 +1,6 @@
-import * as nodesAdapter from '../../../src/plugins/backendAdapter/nodes'
+import * as docNodesApi from '../../../src/plugins/backendApater/docNodes'
 
-describe('backend nodes adapter using Promises (require backend started and setting of nodeId and containerId)', () => {
+describe('backend nodes adapter using Promises', () => {
   /*
    * Before start test remember to set a valid node id and a valid container id
    */
@@ -8,7 +8,7 @@ describe('backend nodes adapter using Promises (require backend started and sett
   const containerId = '6e475b5f90a0caf066e21457c95cdf47dba2c3becae64c4d1502668b82a906d7'
 
   it('should get list of Nodes', () => {
-    return nodesAdapter.getNodes()
+    return docNodesApi.getNodes()
       .then(res => {
         expect(res.success).toBeDefined()
         expect(res.success).toBe(true)
@@ -28,7 +28,7 @@ describe('backend nodes adapter using Promises (require backend started and sett
   })
 
   it('should get list of Containers', () => {
-    return nodesAdapter.getNodeContainers(nodeId)
+    return docNodesApi.getNodeContainers(nodeId)
       .then(res => {
         expect(res.success).toBeDefined()
         expect(res.success).toBe(true)
@@ -47,7 +47,7 @@ describe('backend nodes adapter using Promises (require backend started and sett
   })
 
   it('should get a Container', () => {
-    return nodesAdapter.getNodeContainerById(nodeId, containerId)
+    return docNodesApi.getNodeContainerById(nodeId, containerId)
       .then(res => {
         expect(res.success).toBeDefined()
         expect(res.success).toBe(true)
@@ -61,7 +61,7 @@ describe('backend nodes adapter using Promises (require backend started and sett
   })
 
   it('should get list of Mounts', () => {
-    return nodesAdapter.getNodeContainerMounts(nodeId, containerId)
+    return docNodesApi.getNodeContainerMounts(nodeId, containerId)
       .then(res => {
         expect(res.success).toBeDefined()
         expect(res.success).toBe(true)
@@ -73,14 +73,13 @@ describe('backend nodes adapter using Promises (require backend started and sett
             expect(mountObject.Type).toBeDefined()
             expect(mountObject.Name).toBeDefined()
             expect(mountObject.Destination).toBeDefined()
-
           })
         }
       })
   })
 
   it('should get list of Backup', () => {
-    return nodesAdapter.postContainerBackup(nodeId, containerId)
+    return docNodesApi.postContainerBackup(nodeId, containerId)
       .then(res => {
         expect(res.success).toBeDefined()
         expect(res.success).toBe(true)
@@ -95,5 +94,5 @@ describe('backend nodes adapter using Promises (require backend started and sett
           })
         }
       })
-  }, 30000)
+  })
 })
