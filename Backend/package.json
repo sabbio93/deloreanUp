@@ -1,5 +1,5 @@
 {
-  "name": "Backend",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -11,18 +11,19 @@
     "docs": "jsdoc -r -c config/jsdoc-config.json"
   },
   "dependencies": {
-     "cookie-parser": "~1.4.3",
+    "consul": "^0.34.1",
+    "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "doc-node-api": "^1.0.0",
     "http-errors": "~1.6.2",
-    "pug": "",
     "morgan": "~1.9.0"
   },
   "devDependencies": {
     "@neutrinojs/jest": "^8.3.0",
     "@neutrinojs/node": "^8.3.0",
     "@neutrinojs/standardjs": "^8.3.0",
-    "neutrino": "^8.3.0",
     "docdash": "^1.1.0",
-    "jsdoc": "^3.5.5"
+    "jsdoc": "^3.5.5",
+    "neutrino": "^8.3.0"
   }
 }

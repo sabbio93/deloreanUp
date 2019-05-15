@@ -1,24 +1,46 @@
 {
-  "name": "Frontend",
+  "name": "frontend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "neutrino build",
-    "start": "neutrino start",
-    "lint": "neutrino lint",
-    "test": "neutrino test"
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src test",
+    "flow": "flow start",
+    "flow:stop": "flow stop",
+    "flow:status": "flow status --quiet"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.8.2"
+    "@material/react-button": "^0.12.0",
+    "@material/react-material-icon": "^0.12.0",
+    "@material/react-typography": "^0.12.0",
+    "css-loader": "^2.1.1",
+    "delorean-up-api": "^1.0.0",
+    "prop-types": "^15",
+    "react": "^16",
+    "react-dom": "^16",
+    "react-hot-loader": "^4"
   },
   "devDependencies": {
-    "@neutrinojs/jest": "^8.3.0",
-    "@neutrinojs/react": "^8.3.0",
-    "@neutrinojs/standardjs": "^8.3.0",
-    "neutrino": "^8.3.0"
+    "@babel/preset-flow": "^7.0.0",
+    "@neutrinojs/airbnb": "^9.0.0-rc.3",
+    "@neutrinojs/html-template": "^9.0.0-rc.3",
+    "@neutrinojs/jest": "^9.0.0-rc.3",
+    "@neutrinojs/react": "^9.0.0-rc.3",
+    "@neutrinojs/standardjs": "^9.0.0-rc.3",
+    "@neutrinojs/style-loader": "^9.0.0-rc.3",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-flowtype": "^3.8.1",
+    "flow-bin": "^0.98.1",
+    "jest": "^24",
+    "neutrino": "^9.0.0-rc.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4",
+    "webpack-cli": "^3",
+    "webpack-dev-server": "^3"
   }
 }

@@ -1,0 +1,15 @@
+version: '3'
+services:
+        consul:
+                image: consul:latest
+                volumes:
+                    - configVolume:/config
+                    - dataVolume:/data
+                ports:
+                    - "8500:8500"
+                    - "8300:8300"
+                command: agent -server -ui -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect=1
+volumes:
+        configVolume:
+        dataVolume:
+
