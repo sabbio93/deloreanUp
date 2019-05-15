@@ -8,6 +8,13 @@ $mdc-theme-on-primary: #000000;
 
 // Secondary color
 $mdc-theme-secondary: #37474f;
-$mdc-theme-secondary-light: #a4a4a4;
-$mdc-theme-secondary-dark: #494949;
+$mdc-theme-secondary-light: #62727b;
+$mdc-theme-secondary-dark: #102027;
 $mdc-theme-on-secondary: #ffffff;
+
+// Theme variables
+$app-bar-height: 64px;
+$app-bar-logo-width: 48px;
+$app-bar-logo-height: 48px;
+
+$main-content-top-padding: $app-bar-height;
