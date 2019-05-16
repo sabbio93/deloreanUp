@@ -1,6 +1,12 @@
 
 .node-list-wrapper {
 
+  .mdc-list-item--selected {
+    i, .node-item {
+      color: #000;
+    }
+  }
+
   .node-item-wrapper {
 
     .node-item {

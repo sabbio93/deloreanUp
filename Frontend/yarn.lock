@@ -945,6 +945,20 @@
     "@material/feature-targeting" "^0.44.1"
     "@material/theme" "^1.1.0"
 
+"@material/fab@^1.1.0":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@material/fab/-/fab-1.1.1.tgz#1c8cb818b76ed30d6abb2f667c7df359300fec0d"
+  integrity sha512-6q9F61LIpakeHDninWI4VNLBQhvcyVcS5p1nrPdPDT60IW/lE5iQy7RKivaiMINVaQ0NZDzW1LjCgI5v063cLQ==
+  dependencies:
+    "@material/animation" "^1.0.0"
+    "@material/elevation" "^1.1.0"
+    "@material/feature-targeting" "^0.44.1"
+    "@material/ripple" "^1.1.0"
+    "@material/rtl" "^0.42.0"
+    "@material/shape" "^1.1.1"
+    "@material/theme" "^1.1.0"
+    "@material/typography" "^1.0.0"
+
 "@material/feature-targeting@^0.44.1":
   version "0.44.1"
   resolved "https://registry.yarnpkg.com/@material/feature-targeting/-/feature-targeting-0.44.1.tgz#afafc80294e5efab94bee31a187273d43d34979a"
@@ -1011,6 +1025,16 @@
     "@material/react-ripple" "^0.10.0"
     classnames "^2.2.5"
     react "^16.3.2"
+
+"@material/react-fab@^0.12.1":
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/@material/react-fab/-/react-fab-0.12.1.tgz#d2562019f786953f539e58133a1e97144e328639"
+  integrity sha512-jbXSn0HZ4+WHZI0PvNUaD7hHmpSu+3jdh2ZBmPZXWKw45w234801OsDrR/HaQOFcC6+KC3PdjWMvfdeZuAjrOA==
+  dependencies:
+    "@material/fab" "^1.1.0"
+    "@material/react-ripple" "^0.12.0"
+    classnames "^2.2.6"
+    react "^16.4.2"
 
 "@material/react-layout-grid@^0.12.1":
   version "0.12.1"

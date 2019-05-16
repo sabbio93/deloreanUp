@@ -1,0 +1,136 @@
+
+.container-list-wrapper {
+
+  .container-item-wrapper {
+    font-size: 0.875rem;
+
+    .container-item {
+      display: flex;
+      align-items: center;
+      justify-items: start;
+
+      .container-id {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 10px;
+      }
+
+      .container-image {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 10px;
+      }
+
+      .container-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 10px;
+      }
+    }
+
+    .container-actions {
+      .mdc-fab:first-child {
+        margin-right: 20px;
+        @include mdc-fab-container-color($mdc-theme-primary)
+      }
+    }
+  }
+
+  .container-list-header {
+    font-size: 0.875rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-items: start;
+
+    .container-actions {
+      color: #000;
+    }
+  }
+}
+
+@media only screen and (min-width: mdc-layout-grid-breakpoint-min('desktop')) {
+  /* Styles for desktop only */
+  .container-list-wrapper {
+    padding: 20px 50px;
+
+    .container-list-header, .container-item {
+      width: 100%;
+
+      .container-id {
+        width: calc(50% - 20px);
+      }
+
+      .container-image {
+        width: calc(25% - 20px);
+      }
+
+      .container-name {
+        width: calc(25% - 20px);
+      }
+    }
+
+    .container-actions {
+      width: 140px;
+    }
+  }
+}
+
+@media only screen and (min-width: mdc-layout-grid-breakpoint-max('phone')) and (max-width: mdc-layout-grid-breakpoint-max('tablet')) {
+  /* Styles for tablet only */
+  .container-list-wrapper {
+    padding: 20px 30px;
+
+    .container-list-header, .container-item {
+      width: 100%;
+
+      .container-id {
+        width: 46%;
+      }
+
+      .container-image {
+        width: 27%;
+      }
+
+      .container-name {
+        width: 27%;
+      }
+    }
+
+    .container-actions {
+      width: 120px;
+    }
+  }
+}
+
+@media only screen and (max-width: mdc-layout-grid-breakpoint-max('phone')) {
+  /* Styles for mobile only */
+  .container-list-wrapper {
+    padding: 20px 0px;
+
+    .container-list-header, .container-item {
+      width: 100%;
+
+      .container-id {
+        width: 0;
+        opacity: 0;
+      }
+
+      .container-image {
+        width: 100%;
+      }
+
+      .container-name {
+        width: 0;
+        opacity: 0;
+      }
+    }
+
+    .container-actions {
+      width: 150px;
+    }
+  }
+}

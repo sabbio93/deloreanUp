@@ -14,8 +14,15 @@ type Props = {
 
 function NodeList (props: Props) {
   const [ selectedIndex, setSelectedIndex ] = useState(null)
-
   const { nodes } = props
+
+  function handleNodeClick (index) {
+    if (selectedIndex === index) {
+      setSelectedIndex(null)
+    } else {
+      setSelectedIndex(index)
+    }
+  }
 
   // Create the node list elements
   const nodesList = nodes.map((node, index) => (
@@ -24,7 +31,7 @@ function NodeList (props: Props) {
       node={node}
       active={selectedIndex === index}
       index={index}
-      onClick={setSelectedIndex} />
+      onClick={handleNodeClick} />
   ))
 
   return (

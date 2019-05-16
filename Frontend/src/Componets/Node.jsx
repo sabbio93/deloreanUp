@@ -8,6 +8,7 @@ import {
   ListItemMeta,
   ListDivider
 } from '@material/react-list'
+import ContainerList from './ContainerList'
 
 type Props = {
   node: Object,
@@ -21,7 +22,7 @@ function Node (props: Props) {
 
   return (
     <div className='node-item-wrapper'>
-      <ListItem onClick={() => onClick(index)}>
+      <ListItem selected={active} onClick={() => onClick(index)}>
         <ListItemGraphic graphic={<MaterialIcon icon='settings_system_daydream' />} />
         <ListItemText primaryText={(
           <div className='node-item'>
@@ -33,7 +34,7 @@ function Node (props: Props) {
         <ListItemMeta meta={<MaterialIcon icon={active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} />
       </ListItem>
       <div className={'node-containers-list ' + (active ? 'active' : '')}>
-        <p>Here containers list</p>
+        {active ? <ContainerList nodeId={node.id} /> : null}
       </div>
       <ListDivider />
     </div>
