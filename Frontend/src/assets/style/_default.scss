@@ -11,10 +11,10 @@ html, body {
     padding-top: $main-content-top-padding;
   }
 
-  .btn-secondary {
+  /*.btn-secondary {
     margin-left: 24px;
     @include mdc-button-filled-accessible($mdc-theme-secondary)
-  }
+  }*/
 }
 
 h1 {

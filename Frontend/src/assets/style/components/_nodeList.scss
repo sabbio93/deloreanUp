@@ -1,0 +1,109 @@
+
+.node-list-wrapper {
+
+  .node-item-wrapper {
+
+    .node-item {
+      display: flex;
+      align-items: center;
+      justify-items: start;
+    }
+
+    .node-containers-list {
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+      will-change: opacity;
+      -webkit-transition: all 0.5s $mdc-animation-acceleration-curve-timing-function;
+      -moz-transition: all 0.5s $mdc-animation-acceleration-curve-timing-function;
+      -o-transition: all 0.5s $mdc-animation-acceleration-curve-timing-function;
+      transition: all 0.5s $mdc-animation-acceleration-curve-timing-function;
+      transition-property: height, opacity;
+
+      &.active {
+        opacity: 1;
+        min-height: 200px;
+        height: auto;
+        will-change: opacity;
+        -webkit-transition: all 0.5s $mdc-animation-deceleration-curve-timing-function;
+        -moz-transition: all 0.5s $mdc-animation-deceleration-curve-timing-function;
+        -o-transition: all 0.5s $mdc-animation-deceleration-curve-timing-function;
+        transition: all 0.5s $mdc-animation-deceleration-curve-timing-function;
+        transition-property: height, opacity;
+      }
+    }
+  }
+
+  .node-list-header {
+    display: flex;
+    align-items: center;
+    justify-items: start;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: mdc-layout-grid-breakpoint-min('desktop')) {
+  /* Styles for desktop only */
+  .node-list-wrapper {
+    .node-item, .node-list-header {
+      width: 50%;
+
+      .node-id {
+        width: 20%;
+      }
+
+      .node-host {
+        width: 50%;
+      }
+
+      .node-api-version {
+        width: 30%;
+      }
+    }
+
+  }
+}
+
+@media only screen and (min-width: mdc-layout-grid-breakpoint-max('phone')) and (max-width: mdc-layout-grid-breakpoint-max('tablet')) {
+  /* Styles for tablet only */
+  .node-list-wrapper {
+    .node-item, .node-list-header {
+      width: 80%;
+
+      .node-id {
+        width: 20%;
+      }
+
+      .node-host {
+        width: 50%;
+      }
+
+      .node-api-version {
+        width: 30%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: mdc-layout-grid-breakpoint-max('phone')) {
+  /* Styles for mobile only */
+  .node-list-wrapper {
+    .node-item, .node-list-header {
+      width: 100%;
+
+      .node-id {
+        width: 0;
+        opacity: 0;
+      }
+
+      .node-host {
+        width: 100%;
+      }
+
+      .node-api-version {
+        width: 0;
+        opacity: 0;
+      }
+    }
+  }
+}
