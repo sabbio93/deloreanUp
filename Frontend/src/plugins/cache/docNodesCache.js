@@ -125,14 +125,54 @@ export function getNodes (): Promise<ResponseObject> {
   })
 }
 
-// function getNodeContainers (nodeId: string): Promise<ResponseObject> {
-//   return
-// }
+export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
+  return new Promise((resolve, reject) => {
+    let db = openDatabase()
+    let response: ResponseObject = {}
+    db.onsuccess = () => {
+      let connection = getDatabaseConnection(db)
+      let currentNode = connection.store.get(nodeId)
+      currentNode.onsuccess = (event) => {
+        response.data = event.target.result.containers
+        response.success = true
+        resolve(response)
+      }
+      currentNode.onerror = (event) => {
+        response.data = event.type
+        response.success = false
+        reject(response)
+      }
+    }
+  })
+}
 
-// function getNodeContainerById (nodeId: string, containerId: string): Promise<ResponseObject> {
-//   return
-// }
+export function getNodeContainerById (nodeId: string, containerId: string): Promise<ResponseObject> {
+  return new Promise((resolve, reject) => {
+    let response: ResponseObject = {}
+    getNodeContainers(nodeId).then(result => {
+      let container = result.data.containers.filter(cont => cont.Id === containerId)
+      response.data = container
+      response.success = true
+      resolve(response)
+    }).catch(err => {
+      response.data = err
+      response.success = false
+      reject(response)
+    })
+  })
+}
 
-// function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
-//   return
-// }
+export function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
+  return new Promise((resolve, reject) => {
+    let response: ResponseObject = {}
+    getNodeContainerById(nodeId, containerId).then(result => {
+      response.data = result.data.shift().Mounts
+      response.success = true
+      resolve(response)
+    }).catch(err => {
+      response.data = err
+      response.success = false
+      reject(response)
+    })
+  })
+}
