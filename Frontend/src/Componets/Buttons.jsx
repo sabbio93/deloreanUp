@@ -2,6 +2,7 @@
 import React from 'react'
 import type { Element } from 'react'
 import Button from '@material/react-button'
+import * as docNodes from '../plugins/backendApater/docNodes'
 
 type Props = {
   text: string,
@@ -13,7 +14,7 @@ type Props = {
 
 function Buttons (props: Props) {
   const { text, icon, trailingIcon, className, onClick } = props
-
+  docNodes.getNodes()
   return (
     <Button
       icon={icon}
