@@ -1,12 +1,8 @@
 // @flow
 import * as remoteApi from './remoteApi/docNodes'
 import * as mockApi from './mockApi/docNode'
-import * as docNodesCache from '../cache/docNodesCache'
 
 const docNodesApi = process.env.NODE_ENV === 'production' ? remoteApi : mockApi
-docNodesCache.deleteCache().then(result => {
-  docNodesCache.clearCache().then(result => console.log(result)).catch(err => console.log(err))
-})
 
 /**
  * Standard object containing the response from the api, parameters:
