@@ -51,53 +51,57 @@ const getDatabaseConnection: IndexedDatabaseConnection = (openedDB) => {
   return connection
 }
 
-export function clearCache (): Promise<ResponseObject> {
+export function deleteCache (): Promise<ResponseObject> {
+  return new Promise((resolve, reject) => {
+    let dbRequest = IDB.deleteDatabase(DB_NAME)
+    dbRequest.onsuccess = (event) => resolve(event.type)
+    dbRequest.onerror = (event) => reject(event.type)
+  })
+}
+
+export function clearCache (): Promise<string> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
-    let response: ResponseObject = {}
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let result = connection.store.clear()
-      result.onsuccess = (event) => {
-        response.success = true
-        response.data = event.type
-        resolve(response)
-      }
-      result.onerror = (event) => {
-        response.success = false
-        response.data = event.type
-        reject(response)
-      }
+      result.onsuccess = (event) => resolve(event.type)
+      result.onerror = (event) => reject(event.type)
     }
   })
 }
 
-export function addNode (node: Object): Promise<ResponseObject> {
+export function addNode (node: Object): Promise<string> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
-    let response: ResponseObject = {}
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
-      let result = connection.store.add(node)
-      result.onsuccess = (event) => {
-        response.success = true
-        response.data = event.type
-        resolve(response)
-      }
-      result.onerror = (event) => {
-        response.success = false
-        response.data = event.type
-        reject(response)
-      }
+      let result = connection.store.put(node)
+      result.onsuccess = (event) => resolve(event.type) // alternative return connection.tx.complete (is a promise)
+      result.onerror = (event) => reject(event.type)
     }
   })
 }
 
-// function addContainer (nodeId: string, container: Object): Promise<ResponseObject> {
-// return
-// }
+export function addContainers (nodeId: string, containers: Array<Object>): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let db = openDatabase()
+
+    db.onsuccess = () => {
+      let connection = getDatabaseConnection(db)
+      let currentNode = connection.store.get(nodeId)
+      currentNode.onsuccess = (event) => {
+        let record = event.target.result
+        record.containers = containers
+        currentNode = connection.store.put(record)
+        currentNode.onsuccess = (event) => resolve(event.type)
+        currentNode.onerror = (event) => reject(event.type)
+      }
+    }
+  })
+}
 
 export function getNodes (): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
@@ -132,21 +136,3 @@ export function getNodes (): Promise<ResponseObject> {
 // function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
 //   return
 // }
-
-export function deleteCache (): Promise<ResponseObject> {
-  let responseObject: ResponseObject = { }
-
-  return new Promise((resolve, reject) => {
-    let dbRequest = IDB.deleteDatabase(DB_NAME)
-    dbRequest.onsuccess = (event) => {
-      responseObject.success = true
-      responseObject.data = event.target.result
-      resolve(responseObject)
-    }
-    dbRequest.onerror = () => {
-      responseObject.success = false
-      responseObject.data = event.target.result
-      reject(responseObject)
-    }
-  })
-}
