@@ -9,6 +9,10 @@
 
   .node-item-wrapper {
 
+    .mdc-list-item {
+      z-index: 0;
+    }
+
     .node-item {
       display: flex;
       align-items: center;

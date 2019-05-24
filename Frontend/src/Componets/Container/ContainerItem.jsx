@@ -10,11 +10,18 @@ import {
 import Fab from '@material/react-fab'
 
 type Props = {
-  container: Object
+  nodeId: string,
+  container: Object,
+  toggleDialogContainer: Function // Comes from App.jsx
 }
 
-function Container (props: Props) {
-  const { container } = props
+function ContainerItem (props: Props) {
+  const { nodeId, container, toggleDialogContainer } = props
+
+  function openContainerDialog () {
+    toggleDialogContainer(nodeId, container.Id)
+  }
+
   return (
     <div className='container-item-wrapper'>
       <ListItem>
@@ -30,8 +37,8 @@ function Container (props: Props) {
             <Fab
               title='Open container details'
               mini
-              icon={<MaterialIcon icon='view_module' />}
-              onClick={() => console.log('Open dialog with container data')}
+              icon={<MaterialIcon icon='more_vert' />}
+              onClick={() => openContainerDialog()}
             />
             <Fab
               title='Backup container mounts'
@@ -47,4 +54,4 @@ function Container (props: Props) {
   )
 }
 
-export default Container
+export default ContainerItem

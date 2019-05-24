@@ -11,6 +11,7 @@
 @import '@material/animation/variables';
 @import '@material/animation/functions';
 @import '@material/react-fab/index.scss';
+@import '@material/react-dialog/index.scss';
 
 @import 'default';
 
@@ -18,3 +19,4 @@
 @import 'components/appBar';
 @import 'components/nodeList';
 @import 'components/containerList';
+@import 'components/containerDialog';

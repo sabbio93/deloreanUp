@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader'
 import React from 'react'
 import './assets/style/app.scss'
 import logo from './assets/images/logo.png'
+import type { DialogContainer } from './types'
 
 // Layout
 import Main from './Layout/Main'
@@ -14,13 +15,22 @@ type Props = {};
 
 type State = {
   title: string,
-  nodes: Array<Object>
+  nodes: Array<Object>,
+  dialogContainer: DialogContainer,
 };
 
 class App extends React.Component<Props, State> {
-  state = {
-    title: 'Delorean Up',
-    nodes: []
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      title: 'Delorean Up',
+      nodes: [],
+      dialogContainer: {
+        isOpen: false,
+        nodeId: null,
+        containerId: null
+      }
+    }
   }
 
   componentDidMount () {
@@ -37,8 +47,21 @@ class App extends React.Component<Props, State> {
       .catch(err => console.log(err))
   }
 
+  toggleDialogContainer = (nodeId: string, containerId: string) => {
+    this.setState(state => {
+      // If state.dialogContainer.isOpen === true means that I'm closing it, so nodeId and containerId will be null
+      return {
+        dialogContainer: {
+          isOpen: !state.dialogContainer.isOpen,
+          nodeId: state.dialogContainer.isOpen ? null : nodeId,
+          containerId: state.dialogContainer.isOpen ? null : containerId
+        }
+      }
+    })
+  }
+
   render () {
-    const { title, nodes } = this.state
+    const { title, nodes, dialogContainer } = this.state
 
     return (
       <div>
@@ -46,6 +69,8 @@ class App extends React.Component<Props, State> {
           title={title}
           logo={logo}
           nodes={nodes}
+          dialogContainer={dialogContainer}
+          toggleDialogContainer={this.toggleDialogContainer}
         />
       </div>
     )

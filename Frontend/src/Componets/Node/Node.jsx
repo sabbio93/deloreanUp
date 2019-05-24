@@ -8,17 +8,18 @@ import {
   ListItemMeta,
   ListDivider
 } from '@material/react-list'
-import ContainerList from './ContainerList'
+import ContainerList from '../Container/ContainerList'
 
 type Props = {
   node: Object,
   active: boolean,
   index: number,
-  onClick: Function
+  onClick: Function,
+  toggleDialogContainer: Function
 }
 
 function Node (props: Props) {
-  const { node, active, index, onClick } = props
+  const { node, active, index, onClick, toggleDialogContainer } = props
 
   return (
     <div className='node-item-wrapper'>
@@ -34,7 +35,7 @@ function Node (props: Props) {
         <ListItemMeta meta={<MaterialIcon icon={active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} />
       </ListItem>
       <div className={'node-containers-list ' + (active ? 'active' : '')}>
-        {active ? <ContainerList nodeId={node.id} /> : null}
+        {active ? <ContainerList nodeId={node.id} toggleDialogContainer={toggleDialogContainer} /> : null}
       </div>
       <ListDivider />
     </div>

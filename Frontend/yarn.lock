@@ -929,6 +929,24 @@
     "@material/selection-control" "^0.41.0"
     "@material/theme" "^0.41.0"
 
+"@material/dialog@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@material/dialog/-/dialog-1.1.0.tgz#62f6bf31a7329ff4948609fb0e377ea336654972"
+  integrity sha512-XbFTTdzzRhjClLMDFxz8SR/mwwCBpQL6N7Z7UzX7SgD51UJmd19SsXPItFquRKk3mkNuoFBBcR4KJ6julAW+Fg==
+  dependencies:
+    "@material/animation" "^1.0.0"
+    "@material/base" "^1.0.0"
+    "@material/dom" "^1.1.0"
+    "@material/elevation" "^1.1.0"
+    "@material/feature-targeting" "^0.44.1"
+    "@material/ripple" "^1.1.0"
+    "@material/rtl" "^0.42.0"
+    "@material/shape" "^1.0.0"
+    "@material/theme" "^1.1.0"
+    "@material/typography" "^1.0.0"
+    focus-trap "^4.0.2"
+    tslib "^1.9.3"
+
 "@material/dom@^1.0.0", "@material/dom@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@material/dom/-/dom-1.1.0.tgz#3bd3d1a3415b4181118fecb182d93beda56a6f8c"
@@ -1025,6 +1043,18 @@
     "@material/react-ripple" "^0.10.0"
     classnames "^2.2.5"
     react "^16.3.2"
+
+"@material/react-dialog@^0.12.1":
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/@material/react-dialog/-/react-dialog-0.12.1.tgz#063633647e8c43b5fb67c33ea19b7c7296f453b1"
+  integrity sha512-GdcDwLcmp+i39WnK59TElhSZmnx0Bq/EZzvQd7jdBHFvBoffysQqilhg242ka6738CB0ISp/AgNCqRDlCPq3QA==
+  dependencies:
+    "@material/dialog" "1.1.0"
+    "@material/dom" "^1.0.0"
+    "@material/react-button" "^0.12.1"
+    classnames "^2.2.6"
+    focus-trap "^4.0.2"
+    react "^16.4.2"
 
 "@material/react-fab@^0.12.1":
   version "0.12.1"
@@ -1168,7 +1198,7 @@
   dependencies:
     "@material/ripple" "^0.41.0"
 
-"@material/shape@^1.1.1":
+"@material/shape@^1.0.0", "@material/shape@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@material/shape/-/shape-1.1.1.tgz#7a5368694bc3555e69ea547950904b46fa1024bf"
   integrity sha512-Jge/h1XBLjdLlam4QMSzVgM99e/N8+elQROPkltqVP7eyLc17BwM3aP5cLVfZDgrJgvsjUxbgAP1H1j8sqmUyg==
@@ -3879,6 +3909,14 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+focus-trap@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-4.0.2.tgz#4ee2b96547c9ea0e4252a2d4b2cca68944194663"
+  integrity sha512-HtLjfAK7Hp2qbBtLS6wEznID1mPT+48ZnP2nkHzgjpL4kroYHg0CdqJ5cTXk+UO5znAxF5fRUkhdyfgrhh8Lzw==
+  dependencies:
+    tabbable "^3.1.2"
+    xtend "^4.0.1"
 
 follow-redirects@^1.0.0:
   version "1.7.0"
@@ -8058,6 +8096,11 @@ symbol-tree@^3.2.2:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
   integrity sha1-rifbOPZgp64uHDt9G8KQgZuFGeY=
 
+tabbable@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
+  integrity sha512-wjB6puVXTYO0BSFtCmWQubA/KIn7Xvajw0x0l6eJUudMG/EAiJvIUnyNX6xO4NpGrJ16lbD0eUseB9WxW0vlpQ==
+
 table@^5.2.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/table/-/table-5.3.3.tgz#eae560c90437331b74200e011487a33442bd28b4"
@@ -8788,7 +8831,7 @@ xml-name-validator@^3.0.0:
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
 
-xtend@^4.0.0, xtend@~4.0.1:
+xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
   integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=

@@ -20,3 +20,32 @@ html, body {
 h1 {
   color: $mdc-theme-primary;
 }
+
+.delorean-table-wrapper {
+  overflow-x: auto;
+}
+
+.delorean-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  tr {
+    border-bottom: 1px solid $theme-table-border-color;
+    height: 52px;
+    line-height: 52px;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  td {
+    font-weight: 300;
+  }
+
+  th, td {
+    text-align: left;
+    padding-right: 16px;
+  }
+}

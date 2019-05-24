@@ -9,12 +9,13 @@ import { Headline5 } from '@material/react-typography'
 import MaterialIcon from '@material/react-material-icon'
 
 type Props = {
-  nodes: Array<Object>
+  nodes: Array<Object>,
+  toggleDialogContainer: Function
 }
 
 function NodeList (props: Props) {
   const [ selectedIndex, setSelectedIndex ] = useState(null)
-  const { nodes } = props
+  const { nodes, toggleDialogContainer } = props
 
   function handleNodeClick (index) {
     if (selectedIndex === index) {
@@ -31,7 +32,9 @@ function NodeList (props: Props) {
       node={node}
       active={selectedIndex === index}
       index={index}
-      onClick={handleNodeClick} />
+      onClick={handleNodeClick}
+      toggleDialogContainer={toggleDialogContainer}
+    />
   ))
 
   return (

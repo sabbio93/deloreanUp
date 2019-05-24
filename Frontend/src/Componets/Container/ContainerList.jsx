@@ -1,19 +1,20 @@
 // @flow
 import React, { useState, useEffect } from 'react'
-import { getNodeContainers } from '../plugins/backendApater/docNodes'
+import { getNodeContainers } from '../../plugins/backendApater/docNodes'
 import List, {
   ListGroup,
   ListGroupSubheader, ListItem, ListItemText, ListItemMeta
 } from '@material/react-list'
 import { Subtitle1 } from '@material/react-typography'
-import Container from './Container'
+import ContainerItem from './ContainerItem'
 
 type Props = {
-  nodeId: string
+  nodeId: string,
+  toggleDialogContainer: Function // Comes from App.jsx
 }
 
 function ContainerList (props: Props) {
-  const { nodeId } = props
+  const { nodeId, toggleDialogContainer } = props
   const [ containers, setContainers ] = useState([])
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function ContainerList (props: Props) {
 
   // Create the container list elements
   const containerList = containers.map((container, index) => (
-    <div key={index}><Container container={container} /></div>
+    <div key={index}><ContainerItem nodeId={nodeId} container={container} toggleDialogContainer={toggleDialogContainer} /></div>
   ))
 
   return (
