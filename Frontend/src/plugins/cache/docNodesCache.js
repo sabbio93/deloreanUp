@@ -59,7 +59,7 @@ const getDatabaseConnection: IndexedDatabaseConnection = (openedDB) => {
 }
 
 /**
- * Function that delete the IndexedDB with all objects stores. It is reversible because the database is recreated when a new connection is opened.
+ * Function that deletes the IndexedDB with all objects stores. It is reversible because the database is recreated when a new connection is opened.
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
  */
 export function deleteCache (): Promise<ResponseObject> {
@@ -81,7 +81,7 @@ export function deleteCache (): Promise<ResponseObject> {
 }
 
 /**
- * Function that delete the records inside Node's Object Storage (delorean frontend cache).
+ * Function that deletes the records inside Node's Object Storage (delorean frontend cache).
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
  */
 export function clearCache (): Promise<ResponseObject> {
@@ -106,7 +106,7 @@ export function clearCache (): Promise<ResponseObject> {
 }
 
 /**
- * Function that add a Node element to the NodeOS.
+ * Function that adds a Node element to the NodeOS.
  * @param {string} node - a string representing the node information
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
  */
@@ -132,7 +132,7 @@ export function addNode (node: string): Promise<ResponseObject> {
 }
 
 /**
- * Function that set a container list inside a specific Node record.
+ * Function that sets a container list inside a specific Node record.
  * @param {string} nodeId - a string with the node's id
  * @param {Array<string>} containers - a list with all containers record inside a specific node
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
@@ -156,7 +156,7 @@ export function addContainers (nodeId: string, containers: Array<string>): Promi
 }
 
 /**
- * Function that return all the nodes with all information inside the cache.
+ * Function that returns all the nodes with all information inside the cache.
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
  */
 export function getNodes (): Promise<ResponseObject> {
@@ -182,7 +182,7 @@ export function getNodes (): Promise<ResponseObject> {
 }
 
 /**
- * Function that return the containers list of a specific container.
+ * Function that returns the containers list of a specific container.
  * @param {string} nodeId - a string with the node's id
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
  */
@@ -208,7 +208,7 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
 }
 
 /**
- * Function that return the information about a single container inside a specific node.
+ * Function that returns the informations about a single container inside a specific node.
  * @param {string} nodeId - a string with the node's id
  * @param {string} containerId - a string with the container's id
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
@@ -230,7 +230,7 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
 }
 
 /**
- * Function that return the mounts of a specific container inside a specific node.
+ * Function that returns the mounts of a specific container inside a specific node.
  * @param {string} nodeId - a string with the node's id
  * @param {*} containerId - a string with the container's id
  * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
