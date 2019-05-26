@@ -1,4 +1,5 @@
 // @flow
+// alternative for all API: to return connection.tx.complete (is a promise) instead our standard promise
 
 const IDB = window.indexedDB
 const DB_NAME = 'DeloreanStorage'
@@ -18,6 +19,12 @@ type ResponseObject = {
   data: Object
 }
 
+/**
+ * Object containing the IndexedDB's connection informations
+ * - @type {Object} result - result of the attempt to connect
+ * - @type {Object} tx - transaction object containing all the operations to do in this openend connection, if an operation inside a transactions fail the changes are deleted
+ * - @type {Object} store - bucket (object store) containing records, can be compared to a table in relational databases
+ */
 type IndexedDatabaseConnection = {
   result: Object,
   tx: Object,
@@ -51,41 +58,86 @@ const getDatabaseConnection: IndexedDatabaseConnection = (openedDB) => {
   return connection
 }
 
+/**
+ * Function that delete the IndexedDB with all objects stores. It is reversible because the database is recreated when a new connection is opened.
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
 export function deleteCache (): Promise<ResponseObject> {
+  let response: ResponseObject = {}
+
   return new Promise((resolve, reject) => {
     let dbRequest = IDB.deleteDatabase(DB_NAME)
-    dbRequest.onsuccess = (event) => resolve(event.type)
-    dbRequest.onerror = (event) => reject(event.type)
+    dbRequest.onsuccess = (event) => {
+      response.data = event.type
+      response.success = true
+      resolve(response)
+    }
+    dbRequest.onerror = (event) => {
+      response.data = event.type
+      response.success = false
+      reject(response)
+    }
   })
 }
 
-export function clearCache (): Promise<string> {
+/**
+ * Function that delete the records inside Node's Object Storage (delorean frontend cache).
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
+export function clearCache (): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let result = connection.store.clear()
-      result.onsuccess = (event) => resolve(event.type)
-      result.onerror = (event) => reject(event.type)
+      dbRequest.onsuccess = (event) => {
+        response.data = event.type
+        response.success = true
+        resolve(response)
+      }
+      dbRequest.onerror = (event) => {
+        response.data = event.type
+        response.success = false
+        reject(response)
+      }
     }
   })
 }
 
-export function addNode (node: Object): Promise<string> {
+/**
+ * Function that add a Node element to the NodeOS.
+ * @param {string} node - a string representing the node information
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
+export function addNode (node: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let result = connection.store.put(node)
-      result.onsuccess = (event) => resolve(event.type) // alternative return connection.tx.complete (is a promise)
-      result.onerror = (event) => reject(event.type)
+      dbRequest.onsuccess = (event) => {
+        response.data = event.type
+        response.success = true
+        resolve(response)
+      }
+      dbRequest.onerror = (event) => {
+        response.data = event.type
+        response.success = false
+        reject(response)
+      }
     }
   })
 }
 
-export function addContainers (nodeId: string, containers: Array<Object>): Promise<string> {
+/**
+ * Function that set a container list inside a specific Node record.
+ * @param {string} nodeId - a string with the node's id
+ * @param {Array<string>} containers - a list with all containers record inside a specific node
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
+export function addContainers (nodeId: string, containers: Array<string>): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
 
@@ -103,6 +155,10 @@ export function addContainers (nodeId: string, containers: Array<Object>): Promi
   })
 }
 
+/**
+ * Function that return all the nodes with all information inside the cache.
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
 export function getNodes (): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
@@ -125,6 +181,11 @@ export function getNodes (): Promise<ResponseObject> {
   })
 }
 
+/**
+ * Function that return the containers list of a specific container.
+ * @param {string} nodeId - a string with the node's id
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
 export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
@@ -146,6 +207,12 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
   })
 }
 
+/**
+ * Function that return the information about a single container inside a specific node.
+ * @param {string} nodeId - a string with the node's id
+ * @param {string} containerId - a string with the container's id
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
 export function getNodeContainerById (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let response: ResponseObject = {}
@@ -162,6 +229,12 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
   })
 }
 
+/**
+ * Function that return the mounts of a specific container inside a specific node.
+ * @param {string} nodeId - a string with the node's id
+ * @param {*} containerId - a string with the container's id
+ * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ */
 export function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let response: ResponseObject = {}
