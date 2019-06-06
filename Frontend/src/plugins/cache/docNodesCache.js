@@ -19,22 +19,28 @@ type ResponseObject = {
   data: Object
 }
 
+type IndexedDatabaseConnection = {
+  result: Object,
+  onsuccess: Object,
+  onerror: Object
+}
+
 /**
  * Object containing the IndexedDB's connection informations
  * - @type {Object} result - result of the attempt to connect
  * - @type {Object} tx - transaction object containing all the operations to do in this openend connection, if an operation inside a transactions fail the changes are deleted
  * - @type {Object} store - bucket (object store) containing records, can be compared to a table in relational databases
  */
-type IndexedDatabaseConnection = {
+type IndexedCustomDatabaseConnection = {
   result: Object,
   tx: Object,
   store: Object
 }
 
-const openDatabase = () => {
+const openDatabase = (): IndexedDatabaseConnection => {
   if (!('indexedDB' in window)) {
     alert('IndexedDB not supported')
-    return
+    throw new Error('IndexedDB not supported')
   }
 
   let dbRequest = IDB.open(DB_NAME, VERSION)
@@ -48,10 +54,10 @@ const openDatabase = () => {
   return dbRequest
 }
 
-const getDatabaseConnection: IndexedDatabaseConnection = (openedDB) => {
-  let connection: IndexedDatabaseConnection = {}
+const getDatabaseConnection = (indexedConnection): IndexedCustomDatabaseConnection => {
+  let connection: IndexedCustomDatabaseConnection = {}
 
-  connection.result = openedDB.result
+  connection.result = indexedConnection.result
   connection.tx = connection.result.transaction(STORE_NAME, 'readwrite')
   connection.store = connection.tx.objectStore(STORE_NAME)
 
@@ -87,16 +93,17 @@ export function deleteCache (): Promise<ResponseObject> {
 export function clearCache (): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
+    let response: ResponseObject = {}
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let result = connection.store.clear()
-      dbRequest.onsuccess = (event) => {
+      result.onsuccess = (event) => {
         response.data = event.type
         response.success = true
         resolve(response)
       }
-      dbRequest.onerror = (event) => {
+      result.onerror = (event) => {
         response.data = event.type
         response.success = false
         reject(response)
@@ -113,16 +120,17 @@ export function clearCache (): Promise<ResponseObject> {
 export function addNode (node: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
+    let response: ResponseObject = {}
 
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let result = connection.store.put(node)
-      dbRequest.onsuccess = (event) => {
+      result.onsuccess = (event) => {
         response.data = event.type
         response.success = true
         resolve(response)
       }
-      dbRequest.onerror = (event) => {
+      result.onerror = (event) => {
         response.data = event.type
         response.success = false
         reject(response)
@@ -190,6 +198,7 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let db = openDatabase()
     let response: ResponseObject = {}
+
     db.onsuccess = () => {
       let connection = getDatabaseConnection(db)
       let currentNode = connection.store.get(nodeId)
@@ -216,6 +225,7 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
 export function getNodeContainerById (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let response: ResponseObject = {}
+
     getNodeContainers(nodeId).then(result => {
       let container = result.data.containers.filter(cont => cont.Id === containerId)
       response.data = container
@@ -238,6 +248,7 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
 export function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let response: ResponseObject = {}
+
     getNodeContainerById(nodeId, containerId).then(result => {
       response.data = result.data.shift().Mounts
       response.success = true
