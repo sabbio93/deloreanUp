@@ -125,7 +125,13 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
     cacheUtility.getDatabaseConnection(DB_NAME, TABLE_NAME, TABLE_KEY)
       .then(connection => {
         let currentNode = connection.store.get(nodeId)
-        currentNode.onsuccess = (event) => resolveDatabaseOperation(resolve, event.target.result.containers, response)
+        currentNode.onsuccess = (event) => {
+          if (event.target.result) {
+            resolveDatabaseOperation(resolve, event.target.result.containers, response)
+          } else {
+            resolveDatabaseOperation(resolve, [], response)
+          }
+        }
         currentNode.onerror = (event) => rejectDatabaseOperation(reject, event.type, response)
       }).catch(error => rejectDatabaseOperation(reject, error, response))
   })
@@ -141,11 +147,14 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
   return new Promise((resolve, reject) => {
     let response: ResponseObject = { }
 
-    getNodeContainers(nodeId)
-      .then(result => {
+    getNodeContainers(nodeId).then(result => {
+      if (result.data && result.data.length !== 0) {
         let container = result.data.filter(cont => cont.Id === containerId)
         resolveDatabaseOperation(resolve, container, response)
-      }).catch(error => rejectDatabaseOperation(reject, error, response))
+      } else {
+        resolveDatabaseOperation(resolve, [], response)
+      }
+    }).catch(error => rejectDatabaseOperation(reject, error, response))
   })
 }
 
@@ -153,15 +162,18 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
  * Function that returns the mounts of a specific container inside a specific node.
  * @param {string} nodeId - a string with the node's id
  * @param {*} containerId - a string with the container's id
- * @return {Promise<ResponseObject>} - promise resolved with the container object or with error
+ * @return {Promise<ResponseObject>} - promise resolved with the container mounts or with error
  */
 export function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     let response: ResponseObject = { }
 
-    getNodeContainerById(nodeId, containerId)
-      .then(result => {
+    getNodeContainerById(nodeId, containerId).then(result => {
+      if (result.data && result.data.length !== 0) {
         resolveDatabaseOperation(resolve, result.data.shift().Mounts, response)
-      }).catch(error => rejectDatabaseOperation(reject, error, response))
+      } else {
+        resolveDatabaseOperation(resolve, [], response)
+      }
+    }).catch(error => rejectDatabaseOperation(reject, error, response))
   })
 }
