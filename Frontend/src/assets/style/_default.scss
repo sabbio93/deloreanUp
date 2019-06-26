@@ -40,12 +40,62 @@ h1 {
     font-weight: 500;
   }
 
+  th, td {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.00937em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    line-height: 1rem;
+    margin: 0;
+    padding: 8px 0;
+    list-style-type: none;
+    color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+  }
+}
+
+.delorean-table.modal-table {
   td {
     font-weight: 300;
   }
+}
 
-  th, td {
-    text-align: left;
+.delorean-table.main-table {
+  th {
+    font-weight: bold;
+  }
+
+  td:first-of-type {
+    padding-left: 16px;
+  }
+
+  td:last-of-type {
     padding-right: 16px;
+  }
+}
+
+.delorean-table.hoverable {
+
+  tbody {
+    tr {
+      transition: opacity 15ms linear, background-color 15ms linear;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+      &:active {
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    tr.active {
+      background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.16));
+      &:hover {
+        background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.24));
+      }
+      &:active {
+        background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.36));
+      }
+    }
   }
 }
