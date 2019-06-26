@@ -12,14 +12,23 @@ import Fab from '@material/react-fab'
 type Props = {
   nodeId: string,
   container: Object,
-  toggleDialogContainer: Function // Comes from App.jsx
+  toggleDialogContainer: Function, // Comes from App.jsx
+  handleBackupListChange: Function
 }
 
 function ContainerItem (props: Props) {
-  const { nodeId, container, toggleDialogContainer } = props
+  const { nodeId, container, toggleDialogContainer, handleBackupListChange } = props
 
   function openContainerDialog () {
     toggleDialogContainer(nodeId, container.Id)
+  }
+
+  function startBackup () {
+    handleBackupListChange({
+        nodeId: nodeId,
+        containerId: container.Id,
+        status: 'none'
+      })
   }
 
   return (
@@ -44,7 +53,7 @@ function ContainerItem (props: Props) {
               title='Backup container mounts'
               mini
               icon={<MaterialIcon icon='backup' />}
-              onClick={() => console.log('Backup this container mounts')}
+              onClick={() => startBackup()}
             />
           </div>
         )} />

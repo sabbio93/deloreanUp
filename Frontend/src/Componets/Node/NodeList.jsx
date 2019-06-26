@@ -10,12 +10,13 @@ import MaterialIcon from '@material/react-material-icon'
 
 type Props = {
   nodes: Array<Object>,
-  toggleDialogContainer: Function
+  toggleDialogContainer: Function,
+  handleBackupListChange: Function
 }
 
 function NodeList (props: Props) {
   const [ selectedIndex, setSelectedIndex ] = useState(null)
-  const { nodes, toggleDialogContainer } = props
+  const { nodes, toggleDialogContainer, handleBackupListChange } = props
 
   function handleNodeClick (index) {
     if (selectedIndex === index) {
@@ -34,6 +35,7 @@ function NodeList (props: Props) {
       index={index}
       onClick={handleNodeClick}
       toggleDialogContainer={toggleDialogContainer}
+      handleBackupListChange={handleBackupListChange}
     />
   ))
 

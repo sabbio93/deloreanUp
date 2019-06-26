@@ -15,11 +15,12 @@ type Props = {
   active: boolean,
   index: number,
   onClick: Function,
-  toggleDialogContainer: Function
+  toggleDialogContainer: Function,
+  handleBackupListChange: Function
 }
 
 function Node (props: Props) {
-  const { node, active, index, onClick, toggleDialogContainer } = props
+  const { node, active, index, onClick, toggleDialogContainer, handleBackupListChange } = props
 
   return (
     <div className='node-item-wrapper'>
@@ -35,7 +36,13 @@ function Node (props: Props) {
         <ListItemMeta meta={<MaterialIcon icon={active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />} />
       </ListItem>
       <div className={'node-containers-list ' + (active ? 'active' : '')}>
-        {active ? <ContainerList nodeId={node.id} toggleDialogContainer={toggleDialogContainer} /> : null}
+        {active ? (
+          <ContainerList
+            nodeId={node.id}
+            toggleDialogContainer={toggleDialogContainer}
+            handleBackupListChange={handleBackupListChange}
+          />
+        ) : null}
       </div>
       <ListDivider />
     </div>

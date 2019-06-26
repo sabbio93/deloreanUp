@@ -10,11 +10,12 @@ import ContainerItem from './ContainerItem'
 
 type Props = {
   nodeId: string,
-  toggleDialogContainer: Function // Comes from App.jsx
+  toggleDialogContainer: Function, // Comes from App.jsx
+  handleBackupListChange: Function
 }
 
 function ContainerList (props: Props) {
-  const { nodeId, toggleDialogContainer } = props
+  const { nodeId, toggleDialogContainer, handleBackupListChange } = props
   const [ containers, setContainers ] = useState([])
 
   useEffect(() => {
@@ -31,7 +32,12 @@ function ContainerList (props: Props) {
 
   // Create the container list elements
   const containerList = containers.map((container, index) => (
-    <div key={index}><ContainerItem nodeId={nodeId} container={container} toggleDialogContainer={toggleDialogContainer} /></div>
+    <div key={index}><ContainerItem
+      nodeId={nodeId}
+      container={container}
+      toggleDialogContainer={toggleDialogContainer}
+      handleBackupListChange={handleBackupListChange}
+    /></div>
   ))
 
   return (

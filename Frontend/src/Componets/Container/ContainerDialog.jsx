@@ -12,7 +12,8 @@ import ContainerView from './ContainerView'
 
 type Props = {
   dialogContainer: DialogContainer,
-  toggleDialogContainer: Function
+  toggleDialogContainer: Function,
+  handleBackupListChange: Function
 }
 
 type State = {
@@ -41,8 +42,23 @@ class ContainerDialog extends Component<Props, State> {
     }
   }
 
+  onClose = (action: 'dismiss' | 'accept') => {
+    const { dialogContainer, toggleDialogContainer, handleBackupListChange } = this.props
+    // Do something
+    console.log(action)
+    if (action === 'accept') {
+      handleBackupListChange({
+        nodeId: dialogContainer.nodeId,
+        containerId: dialogContainer.containerId,
+        status: 'none'
+      })
+    }
+    // Then close dialog
+    toggleDialogContainer()
+  }
+
   render () {
-    const { dialogContainer, toggleDialogContainer } = this.props
+    const { dialogContainer } = this.props
     const { container } = this.state
 
     if (container === null) {
@@ -52,7 +68,7 @@ class ContainerDialog extends Component<Props, State> {
     return (
       <Dialog
         open={dialogContainer.isOpen}
-        onClose={toggleDialogContainer}
+        onClose={this.onClose}
         className='container-dialog'
       >
         <DialogTitle>{`Container ${container.Names[0]}`}</DialogTitle>

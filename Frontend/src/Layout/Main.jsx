@@ -3,19 +3,31 @@ import React from 'react'
 import AppBar from '../Componets/Layout/AppBar'
 import { Cell, Grid, Row } from '@material/react-layout-grid'
 import NodeList from '../Componets/Node/NodeList'
-import type { DialogContainer } from '../types'
+import type {DialogContainer, BackupList} from '../types'
 import ContainerDialog from '../Componets/Container/ContainerDialog'
+import ContainerBackup from '../Componets/Container/ContainerBackup'
 
 type Props = {
   title: string,
   logo: string,
   nodes: Array<Object>,
   dialogContainer: DialogContainer,
-  toggleDialogContainer: Function
+  backupList: BackupList,
+  toggleDialogContainer: Function,
+  handleBackupListChange: Function
 }
 
 function Main (props: Props) {
-  const { title, logo, nodes, dialogContainer, toggleDialogContainer } = props
+  const {
+    title,
+    logo,
+    nodes,
+    dialogContainer,
+    backupList,
+    toggleDialogContainer,
+    handleBackupListChange
+  } = props
+
   return (
     <div className='app'>
       <AppBar title={title} logo={logo} />
@@ -23,13 +35,26 @@ function Main (props: Props) {
         <Grid>
           <Row>
             <Cell columns={12}>
-              <NodeList nodes={nodes} toggleDialogContainer={toggleDialogContainer} />
+              <NodeList
+                nodes={nodes}
+                toggleDialogContainer={toggleDialogContainer}
+                handleBackupListChange={handleBackupListChange}
+              />
+
               {dialogContainer.isOpen ? (
                 <ContainerDialog
                   dialogContainer={dialogContainer}
                   toggleDialogContainer={toggleDialogContainer}
+                  handleBackupListChange={handleBackupListChange}
                 />
-              ) : null}
+              ) : null }
+
+              {backupList.length > 0 ? (
+                <ContainerBackup
+                  backupList={backupList}
+                  handleBackupListChange={handleBackupListChange}
+                />
+              ) : null }
             </Cell>
           </Row>
         </Grid>
