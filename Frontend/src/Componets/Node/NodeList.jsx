@@ -53,38 +53,8 @@ class NodeList extends Component<Props, State> {
       />
     ))
 
-    // Create the node list elements
-    const nodesTable = nodes.map((node, index) => (
-      <NodeCopy
-        key={index}
-        node={node}
-        active={selectedIndex === index}
-        index={index}
-        onClick={this.handleNodeClick}
-        toggleDialogContainer={toggleDialogContainer}
-        handleBackupListChange={handleBackupListChange}
-      />
-    ))
-
     return (
       <div className='node-list-wrapper'>
-        <Headline5 tag='h2'>Active Doc Nodes</Headline5>
-        <div className='delorean-table-wrapper'>
-          <table className='delorean-table hoverable main-table'>
-            <thead>
-            <tr>
-              <th/>
-              <th>ID</th>
-              <th>HOST</th>
-              <th>API Version</th>
-              <th/>
-            </tr>
-            </thead>
-            <tbody>
-            {nodesTable}
-            </tbody>
-          </table>
-        </div>
 
         <ListGroup>
           <ListGroupSubheader tag='div'><Headline5 tag='h2'>Active Doc Nodes</Headline5></ListGroupSubheader>
