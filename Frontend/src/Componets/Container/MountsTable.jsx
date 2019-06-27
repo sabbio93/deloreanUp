@@ -13,7 +13,7 @@ function MountsTable (props: Props) {
     <div className='mounts-info'>
       <Headline5 className='heading' tag='h6'>Mounts info</Headline5>
       <div className='delorean-table-wrapper'>
-        <table className='delorean-table'>
+        <table className='delorean-table modal-table'>
           <thead>
             <tr>
               <th>
