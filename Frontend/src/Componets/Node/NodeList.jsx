@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react'
 import Node from './Node'
-import NodeCopy from './NodeCopy'
 import List, {
   ListGroup,
   ListGroupSubheader, ListItem, ListItemText, ListItemGraphic
@@ -20,14 +19,14 @@ type State = {
 }
 
 class NodeList extends Component<Props, State> {
-  constructor(props) {
-    super(props);
+  constructor (props: Props) {
+    super(props)
     this.state = {
       selectedIndex: null
     }
   }
 
-  handleNodeClick = (index) => {
+  handleNodeClick = (index: number) => {
     const { selectedIndex } = this.state
     if (selectedIndex === index) {
       this.setState({ selectedIndex: null })
@@ -36,7 +35,7 @@ class NodeList extends Component<Props, State> {
     }
   }
 
-  render() {
+  render () {
     const { selectedIndex } = this.state
     const { nodes, toggleDialogContainer, handleBackupListChange } = this.props
 
@@ -75,10 +74,6 @@ class NodeList extends Component<Props, State> {
       </div>
     )
   }
-}
-
-NodeList.defaultProps = {
-  nodes: []
 }
 
 export default NodeList

@@ -998,6 +998,16 @@
   resolved "https://registry.yarnpkg.com/@material/layout-grid/-/layout-grid-0.41.0.tgz#2e7d3be76313e0684d573b10c2c6a88b3230d251"
   integrity sha512-Sa5RNoTGgfIojqJ9E94p7/k11V6q/tGk7HwKi4AQNAPjxield0zcl3G/SbsSb8YSHoK+D+7OXDN+n11x6EqF7g==
 
+"@material/linear-progress@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@material/linear-progress/-/linear-progress-1.1.0.tgz#559921d4274fce0131fdf146698582d292855d6a"
+  integrity sha512-MIK0cD/o1rTLREtAfTK3v60h7A0/wAu8/3v9dPTMlAPe+Y5gOarAizYWM3r/bp88sGO4gU8nPK0X9/daD28pNw==
+  dependencies:
+    "@material/animation" "^1.0.0"
+    "@material/base" "^1.0.0"
+    "@material/theme" "^1.1.0"
+    tslib "^1.9.3"
+
 "@material/list@^1.0.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@material/list/-/list-1.1.1.tgz#296ed85ae3585af1749462e5bafd617d5675e85e"
@@ -1074,6 +1084,14 @@
     "@material/layout-grid" "^0.41.0"
     classnames "^2.2.6"
     react "^16.4.2"
+
+"@material/react-linear-progress@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@material/react-linear-progress/-/react-linear-progress-0.14.0.tgz#b2bc0a6d43583d4b1954ece407d5c2dadb13eca1"
+  integrity sha512-eRtVwMEZiH0VauAWjGqgg0dqtbP8nN0nopv6B4aiodw8nrSz+6GPlBQG693sP+AD/BdJoU4FtNibozldiooBug==
+  dependencies:
+    "@material/linear-progress" "^1.1.0"
+    classnames "^2.2.6"
 
 "@material/react-list@^0.12.0":
   version "0.12.0"

@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader'
 import React from 'react'
 import './assets/style/app.scss'
 import logo from './assets/images/logo.png'
-import type { DialogContainer, BackupList, BackupEntry } from './types'
+import type { DialogContainer, BackupList, BackupEntry, BackupStatus } from './types'
 
 // Layout
 import Main from './Layout/Main'
@@ -64,13 +64,35 @@ class App extends React.Component<Props, State> {
 
   handleBackupListChange = (backupEntry: BackupEntry, removeIndex: number | null = null) => {
     const { backupList } = this.state
-    if (removeIndex) {
+    if (removeIndex !== null) {
       backupList.splice(removeIndex, 1)
     } else {
-      backupList.push(backupEntry)
+      let entryExist = backupList.filter(entry => entry.nodeId === backupEntry.nodeId && entry.containerId === backupEntry.containerId)
+      // EntryExist contain only the eventual entry with same nodeId and containerId, so if the entry is already in the list do nothing
+      if (entryExist.length === 0) {
+        backupList.push(backupEntry)
+      }
     }
 
-    this.setState({ backupList });
+    this.setState({ backupList })
+  }
+
+  changeBackupEntryStatus = (backupEntry: BackupEntry, status: BackupStatus) => {
+    const { backupList } = this.state
+    let index = null
+    backupList.map((entry, i) => {
+      if (entry.nodeId === backupEntry.nodeId && entry.containerId === backupEntry.containerId) {
+        index = i
+      }
+    })
+    if (index !== null) {
+      backupList[index].status = status
+    }
+    this.setState({ backupList })
+  }
+
+  removeAllBackupEntries = () => {
+    this.setState({ backupList: [] })
   }
 
   render () {
@@ -86,6 +108,8 @@ class App extends React.Component<Props, State> {
           backupList={backupList}
           toggleDialogContainer={this.toggleDialogContainer}
           handleBackupListChange={this.handleBackupListChange}
+          changeBackupEntryStatus={this.changeBackupEntryStatus}
+          removeAllBackupEntries={this.removeAllBackupEntries}
         />
       </div>
     )

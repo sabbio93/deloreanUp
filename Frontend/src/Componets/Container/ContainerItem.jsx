@@ -25,10 +25,10 @@ function ContainerItem (props: Props) {
 
   function startBackup () {
     handleBackupListChange({
-        nodeId: nodeId,
-        containerId: container.Id,
-        status: 'none'
-      })
+      nodeId: nodeId,
+      containerId: container.Id,
+      status: 'none'
+    })
   }
 
   return (

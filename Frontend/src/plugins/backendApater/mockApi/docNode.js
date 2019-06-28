@@ -87,7 +87,14 @@ export function postContainerBackup (nodeId: string, containerId: string): Promi
     data: backups[nodeId][containerId]
   }
 
-  return new Promise<ResponseObject>(resolve => resolve(responseObject))
+  return new Promise<ResponseObject>(resolve => {
+    // Used to simulate the time between the execution of the backup
+    // To be removed
+    setTimeout(function () {
+      resolve(responseObject)
+    }, 5000)
+    // return resolve(responseObject)
+  })
 }
 
 const nodes = {

@@ -3,7 +3,7 @@ import React from 'react'
 import AppBar from '../Componets/Layout/AppBar'
 import { Cell, Grid, Row } from '@material/react-layout-grid'
 import NodeList from '../Componets/Node/NodeList'
-import type {DialogContainer, BackupList} from '../types'
+import type { DialogContainer, BackupList } from '../types'
 import ContainerDialog from '../Componets/Container/ContainerDialog'
 import ContainerBackup from '../Componets/Container/ContainerBackup'
 
@@ -14,7 +14,9 @@ type Props = {
   dialogContainer: DialogContainer,
   backupList: BackupList,
   toggleDialogContainer: Function,
-  handleBackupListChange: Function
+  handleBackupListChange: Function,
+  changeBackupEntryStatus: Function,
+  removeAllBackupEntries: Function
 }
 
 function Main (props: Props) {
@@ -25,7 +27,9 @@ function Main (props: Props) {
     dialogContainer,
     backupList,
     toggleDialogContainer,
-    handleBackupListChange
+    handleBackupListChange,
+    changeBackupEntryStatus,
+    removeAllBackupEntries
   } = props
 
   return (
@@ -49,12 +53,12 @@ function Main (props: Props) {
                 />
               ) : null }
 
-              {backupList.length > 0 ? (
-                <ContainerBackup
-                  backupList={backupList}
-                  handleBackupListChange={handleBackupListChange}
-                />
-              ) : null }
+              <ContainerBackup
+                backupList={backupList}
+                handleBackupListChange={handleBackupListChange}
+                changeBackupEntryStatus={changeBackupEntryStatus}
+                removeAllBackupEntries={removeAllBackupEntries}
+              />
             </Cell>
           </Row>
         </Grid>

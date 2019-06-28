@@ -8,10 +8,10 @@ export type DialogContainer = {
 
 export type BackupStatus = 'none' | 'running' | 'done'
 
-export type BackupList = Array<BackupEntry>
-
 export type BackupEntry = {
   nodeId: string,
   containerId: string,
   status: BackupStatus
 }
+
+export type BackupList = Array<BackupEntry>
