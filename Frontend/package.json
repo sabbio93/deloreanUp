@@ -26,6 +26,7 @@
     "@material/ripple": "^2.1.1",
     "css-loader": "^2.1.1",
     "delorean-up-api": "^1.0.0",
+    "moment": "^2.24.0",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",

@@ -3,9 +3,10 @@ import React from 'react'
 import AppBar from '../Componets/Layout/AppBar'
 import { Cell, Grid, Row } from '@material/react-layout-grid'
 import NodeList from '../Componets/Node/NodeList'
-import type { DialogContainer, BackupList } from '../types'
+import type { DialogContainer, BackupList, BackupResultDialog } from '../types'
 import ContainerDialog from '../Componets/Container/ContainerDialog'
 import ContainerBackup from '../Componets/Container/ContainerBackup'
+import ContainerBackupResult from '../Componets/Container/ContainerBackupResult'
 
 type Props = {
   title: string,
@@ -13,10 +14,12 @@ type Props = {
   nodes: Array<Object>,
   dialogContainer: DialogContainer,
   backupList: BackupList,
+  backupResultDialog: BackupResultDialog,
   toggleDialogContainer: Function,
   handleBackupListChange: Function,
   changeBackupEntryStatus: Function,
-  removeAllBackupEntries: Function
+  removeAllBackupEntries: Function,
+  toggleDialogBackupResult: Function
 }
 
 function Main (props: Props) {
@@ -26,10 +29,12 @@ function Main (props: Props) {
     nodes,
     dialogContainer,
     backupList,
+    backupResultDialog,
     toggleDialogContainer,
     handleBackupListChange,
     changeBackupEntryStatus,
-    removeAllBackupEntries
+    removeAllBackupEntries,
+    toggleDialogBackupResult
   } = props
 
   return (
@@ -55,10 +60,19 @@ function Main (props: Props) {
 
               <ContainerBackup
                 backupList={backupList}
+                dialogContainerIsOpen={dialogContainer.isOpen}
                 handleBackupListChange={handleBackupListChange}
                 changeBackupEntryStatus={changeBackupEntryStatus}
                 removeAllBackupEntries={removeAllBackupEntries}
+                toggleDialogBackupResult={toggleDialogBackupResult}
               />
+
+              {backupResultDialog.isOpen ? (
+                <ContainerBackupResult
+                  backupResultDialog={backupResultDialog}
+                  toggleDialogBackupResult={toggleDialogBackupResult}
+                />
+              ) : null}
             </Cell>
           </Row>
         </Grid>

@@ -1,6 +1,7 @@
 
 .container-dialog {
   @include mdc-dialog-max-width(720px, 16px);
+  z-index: 110;
 
   .container-view {
     font-size: 0.875rem;

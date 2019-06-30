@@ -149,6 +149,45 @@
   }
 }
 
+.backup-result-dialog {
+  @include mdc-dialog-max-width(720px, 16px);
+  z-index: 110;
+
+  .delorean-table {
+
+    th {
+
+    }
+
+    td {
+      font-weight: 300;
+      font-size: 0.875rem !important;
+      padding: 8px 16px !important;
+    }
+
+    td, th {
+      font-size: 0.875rem !important;
+      padding: 8px 16px !important;
+    }
+
+    .backup-name-columns {
+      width: 20%;
+    }
+
+    .container-name-columns {
+      width: 25%;
+    }
+
+    .hostname-columns {
+      width: 36%;
+    }
+
+    .created-at-columns {
+      width: 19%;
+    }
+  }
+}
+
 @media (min-width: 752px) {
   max-width: 720px;
 }

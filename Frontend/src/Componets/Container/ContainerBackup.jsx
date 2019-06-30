@@ -2,22 +2,25 @@
 import React, { Component } from 'react'
 import { Headline6 } from '@material/react-typography'
 import MaterialIcon from '@material/react-material-icon'
-import type { BackupEntry, BackupList, BackupStatus } from '../../types'
+import type { BackupEntry, BackupList, BackupResult, BackupStatus } from '../../types'
 import LinearProgress from '@material/react-linear-progress'
 
 import { postContainerBackup } from '../../plugins/backendApater/docNodes'
 
 type Props = {
   backupList: BackupList,
+  dialogContainerIsOpen: boolean,
   handleBackupListChange: Function,
   changeBackupEntryStatus: Function,
-  removeAllBackupEntries: Function
+  removeAllBackupEntries: Function,
+  toggleDialogBackupResult: Function
 }
 
 type State = {
   reduced: boolean,
   canClose: boolean,
-  overallStatus: BackupStatus
+  overallStatus: BackupStatus,
+  backupResults: { [key: string]: Array<BackupResult> }
 }
 
 class ContainerBackup extends Component<Props, State> {
@@ -26,15 +29,24 @@ class ContainerBackup extends Component<Props, State> {
     this.state = {
       reduced: false,
       canClose: false,
-      overallStatus: 'none'
+      overallStatus: 'none',
+      backupResults: {}
     }
   }
 
   componentDidMount () {
+    if (this.props.dialogContainerIsOpen) {
+      this.setState({ reduced: true })
+    }
     this.startNewBackup()
   }
 
-  componentDidUpdate () {
+  componentDidUpdate (prevProps: Props) {
+    if (prevProps.dialogContainerIsOpen !== this.props.dialogContainerIsOpen) {
+      if (this.props.dialogContainerIsOpen) {
+        this.setState({ reduced: true })
+      }
+    }
     this.startNewBackup()
   }
 
@@ -47,7 +59,9 @@ class ContainerBackup extends Component<Props, State> {
       this.computeCurrentState()
       postContainerBackup(backupEntry.nodeId, backupEntry.containerId)
         .then(result => {
-          console.log(result)
+          const { backupResults } = this.state
+          backupResults[backupEntry.nodeId + '_' + backupEntry.containerId] = result.data.backups
+          this.setState({ backupResults })
           changeBackupEntryStatus(backupEntry, 'done')
           this.computeCurrentState()
         })
@@ -65,6 +79,7 @@ class ContainerBackup extends Component<Props, State> {
   computeCurrentState = () => {
     const { backupList } = this.props
     const backupDone = backupList.filter(entry => entry.status === 'done')
+
     if (backupDone.length === backupList.length) {
       this.setState({
         overallStatus: 'done',
@@ -92,8 +107,15 @@ class ContainerBackup extends Component<Props, State> {
       removeAllBackupEntries()
       this.setState({
         reduced: false
-      });
+      })
     }
+  }
+
+  onBackupEntryResultClick = (nodeId: string, containerId: string) => {
+    const { backupResults } = this.state
+    const { toggleDialogBackupResult } = this.props
+    toggleDialogBackupResult(backupResults[nodeId + '_' + containerId])
+    this.setState({ reduced: true })
   }
 
   render () {
@@ -159,6 +181,12 @@ class ContainerBackup extends Component<Props, State> {
                     <MaterialIcon title={backupEntry.status} className={`backup-status ${backupEntry.status}`} icon='radio_button_checked' />
                   </td>
                   <td>
+                    <MaterialIcon
+                      title='Backup entry results'
+                      className={backupEntry.status === 'done' ? 'action' : 'action disabled'}
+                      icon='more_vert'
+                      onClick={() => this.onBackupEntryResultClick(backupEntry.nodeId, backupEntry.containerId)}
+                    />
                     <MaterialIcon
                       title='Remove entry'
                       className={backupEntry.status === 'done' ? 'action' : 'action disabled'}

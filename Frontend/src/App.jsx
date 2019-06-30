@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader'
 import React from 'react'
 import './assets/style/app.scss'
 import logo from './assets/images/logo.png'
-import type { DialogContainer, BackupList, BackupEntry, BackupStatus } from './types'
+import type { DialogContainer, BackupList, BackupEntry, BackupStatus, BackupResultDialog, BackupResult } from './types'
 
 // Layout
 import Main from './Layout/Main'
@@ -17,7 +17,8 @@ type State = {
   title: string,
   nodes: Array<Object>,
   dialogContainer: DialogContainer,
-  backupList: BackupList
+  backupList: BackupList,
+  backupResultDialog: BackupResultDialog
 };
 
 class App extends React.Component<Props, State> {
@@ -31,7 +32,11 @@ class App extends React.Component<Props, State> {
         nodeId: null,
         containerId: null
       },
-      backupList: []
+      backupList: [],
+      backupResultDialog: {
+        isOpen: false,
+        backupResults: []
+      }
     }
   }
 
@@ -57,6 +62,18 @@ class App extends React.Component<Props, State> {
           isOpen: !state.dialogContainer.isOpen,
           nodeId: state.dialogContainer.isOpen ? null : nodeId,
           containerId: state.dialogContainer.isOpen ? null : containerId
+        }
+      }
+    })
+  }
+
+  toggleDialogBackupResult = (backupResults: Array<BackupResult> = []) => {
+    this.setState(state => {
+      // If state.backupResultDialog.isOpen === true means that I'm closing it, so backupResults will be null
+      return {
+        backupResultDialog: {
+          isOpen: !state.backupResultDialog.isOpen,
+          backupResults: state.backupResultDialog.isOpen ? [] : backupResults
         }
       }
     })
@@ -96,7 +113,7 @@ class App extends React.Component<Props, State> {
   }
 
   render () {
-    const { title, nodes, dialogContainer, backupList } = this.state
+    const { title, nodes, dialogContainer, backupList, backupResultDialog } = this.state
 
     return (
       <div>
@@ -106,10 +123,12 @@ class App extends React.Component<Props, State> {
           nodes={nodes}
           dialogContainer={dialogContainer}
           backupList={backupList}
+          backupResultDialog={backupResultDialog}
           toggleDialogContainer={this.toggleDialogContainer}
           handleBackupListChange={this.handleBackupListChange}
           changeBackupEntryStatus={this.changeBackupEntryStatus}
           removeAllBackupEntries={this.removeAllBackupEntries}
+          toggleDialogBackupResult={this.toggleDialogBackupResult}
         />
       </div>
     )

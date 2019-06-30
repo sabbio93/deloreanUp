@@ -15,3 +15,15 @@ export type BackupEntry = {
 }
 
 export type BackupList = Array<BackupEntry>
+
+export type BackupResult = {
+  backupName: string,
+  containerName: string,
+  createdAt: Date,
+  hostname: string
+}
+
+export type BackupResultDialog = {
+  isOpen: boolean,
+  backupResults: Array<BackupResult>
+}
