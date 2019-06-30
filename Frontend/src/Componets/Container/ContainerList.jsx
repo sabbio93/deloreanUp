@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import { getNodeContainers } from '../../plugins/backendApater/docNodes'
 import List, {
   ListGroup,
@@ -14,52 +14,66 @@ type Props = {
   handleBackupListChange: Function
 }
 
-function ContainerList (props: Props) {
-  const { nodeId, toggleDialogContainer, handleBackupListChange } = props
-  const [ containers, setContainers ] = useState([])
+type State = {
+  containers: Array
+}
 
-  useEffect(() => {
+class ContainerList extends Component <Props, State> {
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      containers: []
+    }
+  }
+
+  componentDidMount () {
+    const { nodeId } = this.props
     getNodeContainers(nodeId)
       .then(response => {
         if (response.success) {
-          setContainers(response.data.containers)
+          this.setState({ containers: response.data.containers })
         } else {
           console.log(response.data)
         }
       })
       .catch(err => console.log(err))
-  }, [nodeId])
+  }
 
-  // Create the container list elements
-  const containerList = containers.map((container, index) => (
-    <div key={index}><ContainerItem
-      nodeId={nodeId}
-      container={container}
-      toggleDialogContainer={toggleDialogContainer}
-      handleBackupListChange={handleBackupListChange}
-    /></div>
-  ))
+  render () {
+    const { nodeId, toggleDialogContainer, handleBackupListChange } = this.props
+    const { containers } = this.state
 
-  return (
-    <div className='container-list-wrapper'>
-      <ListGroup>
-        <ListGroupSubheader tag='div'><Subtitle1 tag='h4'>Active Containers of the Node (NodeId: {nodeId})</Subtitle1></ListGroupSubheader>
-        <List nonInteractive >
-          <ListItem>
-            <ListItemText primaryText={<div className='container-list-header'>
-              <span className='container-id'>ID</span>
-              <span className='container-image'>Image</span>
-              <span className='container-name'>Name</span>
-              <ListItemMeta meta={<span className='container-actions'>Actions</span>} />
-            </div>} />
-          </ListItem>
-        </List>
-        <List>
-          {containerList}
-        </List>
-      </ListGroup>
-    </div>
-  )
+    // Create the container list elements
+    const containerList = containers.map((container, index) => (
+      <div key={index}><ContainerItem
+        nodeId={nodeId}
+        container={container}
+        toggleDialogContainer={toggleDialogContainer}
+        handleBackupListChange={handleBackupListChange}
+      /></div>
+    ))
+
+    return (
+      <div className='container-list-wrapper'>
+        <ListGroup>
+          <ListGroupSubheader tag='div'><Subtitle1 tag='h4'>Active Containers of the Node (NodeId: {nodeId})</Subtitle1></ListGroupSubheader>
+          <List nonInteractive >
+            <ListItem>
+              <ListItemText primaryText={<div className='container-list-header'>
+                <span className='container-id'>ID</span>
+                <span className='container-image'>Image</span>
+                <span className='container-name'>Name</span>
+                <ListItemMeta meta={<span className='container-actions'>Actions</span>} />
+              </div>} />
+            </ListItem>
+          </List>
+          <List>
+            {containerList}
+          </List>
+        </ListGroup>
+      </div>
+    )
+  }
 }
 
 export default ContainerList

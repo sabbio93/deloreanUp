@@ -44,9 +44,9 @@ class ContainerDialog extends Component<Props, State> {
 
   onClose = (action: 'dismiss' | 'accept') => {
     const { dialogContainer, toggleDialogContainer, handleBackupListChange } = this.props
-    // Do something
-    console.log(action)
+
     if (action === 'accept') {
+      // Add the container info (nodeId and containerId) to start the backup
       handleBackupListChange({
         nodeId: dialogContainer.nodeId,
         containerId: dialogContainer.containerId,

@@ -52,19 +52,32 @@ class ContainerBackup extends Component<Props, State> {
 
   startNewBackup = () => {
     const { changeBackupEntryStatus } = this.props
+    // Get all the new backupEntry that need to be started
     const backupToStart = this.props.backupList.filter(backupEntry => backupEntry.status === 'none')
+
+    if (backupToStart.length > 0) {
+      this.setState({ reduced: false });
+    }
+
     backupToStart.map(backupEntry => {
       // Start the backup for each entry
+      // Before change the status to running
       changeBackupEntryStatus(backupEntry, 'running')
+      // Update the overallStatus because a new backup is started
       this.computeCurrentState()
+      // Request the server to start the backup
       postContainerBackup(backupEntry.nodeId, backupEntry.containerId)
         .then(result => {
+          // Add a new BackupResult on the state
           const { backupResults } = this.state
           backupResults[backupEntry.nodeId + '_' + backupEntry.containerId] = result.data.backups
           this.setState({ backupResults })
+          // Update status to done
           changeBackupEntryStatus(backupEntry, 'done')
+          // Update the overallStatus because a backup is ended
           this.computeCurrentState()
         })
+        .catch(err => console.log(err))
     })
   }
 
@@ -80,6 +93,7 @@ class ContainerBackup extends Component<Props, State> {
     const { backupList } = this.props
     const backupDone = backupList.filter(entry => entry.status === 'done')
 
+    // If the length of backupDone is equal to backupList means that all the backups are completed
     if (backupDone.length === backupList.length) {
       this.setState({
         overallStatus: 'done',
@@ -95,6 +109,7 @@ class ContainerBackup extends Component<Props, State> {
 
   onEntryDismiss = (backupEntry: BackupEntry, index: number) => {
     const { handleBackupListChange } = this.props
+    // Can dismiss a BackupEntry only if the status is done
     if (backupEntry.status === 'done') {
       handleBackupListChange(backupEntry, index)
     }
@@ -103,6 +118,7 @@ class ContainerBackup extends Component<Props, State> {
   onBackupDialogClose = () => {
     const { overallStatus, canClose } = this.state
     const { removeAllBackupEntries } = this.props
+    // Can dismiss all BackupEntry only if all the status are done and canClose is true
     if (overallStatus === 'done' && canClose) {
       removeAllBackupEntries()
       this.setState({
@@ -114,6 +130,7 @@ class ContainerBackup extends Component<Props, State> {
   onBackupEntryResultClick = (nodeId: string, containerId: string) => {
     const { backupResults } = this.state
     const { toggleDialogBackupResult } = this.props
+    // Add the requested BackupResult array to the ContainerBackupDialog
     toggleDialogBackupResult(backupResults[nodeId + '_' + containerId])
     this.setState({ reduced: true })
   }

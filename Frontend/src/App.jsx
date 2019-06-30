@@ -32,8 +32,8 @@ class App extends React.Component<Props, State> {
         nodeId: null,
         containerId: null
       },
-      backupList: [],
-      backupResultDialog: {
+      backupList: [], // list of the active container backuping
+      backupResultDialog: { // Object with data to open the backup result dialog
         isOpen: false,
         backupResults: []
       }
@@ -41,6 +41,7 @@ class App extends React.Component<Props, State> {
   }
 
   componentDidMount () {
+    // Get nodes list from server
     getNodes()
       .then(response => {
         if (response.success) {
@@ -54,6 +55,11 @@ class App extends React.Component<Props, State> {
       .catch(err => console.log(err))
   }
 
+  /**
+   * Method to open or close the dialog for the container info
+   * @param {string} nodeId
+   * @param {string} containerId
+   */
   toggleDialogContainer = (nodeId: string, containerId: string) => {
     this.setState(state => {
       // If state.dialogContainer.isOpen === true means that I'm closing it, so nodeId and containerId will be null
@@ -67,6 +73,10 @@ class App extends React.Component<Props, State> {
     })
   }
 
+  /**
+   * Method to open or close the dialog for the backup result of a container
+   * @param {Array<BackupResult>} backupResults
+   */
   toggleDialogBackupResult = (backupResults: Array<BackupResult> = []) => {
     this.setState(state => {
       // If state.backupResultDialog.isOpen === true means that I'm closing it, so backupResults will be null
@@ -79,6 +89,11 @@ class App extends React.Component<Props, State> {
     })
   }
 
+  /**
+   * Method to add or remove a BackupEnty to the list of active backups
+   * @param {BackupEntry} backupEntry
+   * @param {number} removeIndex
+   */
   handleBackupListChange = (backupEntry: BackupEntry, removeIndex: number | null = null) => {
     const { backupList } = this.state
     if (removeIndex !== null) {
@@ -94,6 +109,11 @@ class App extends React.Component<Props, State> {
     this.setState({ backupList })
   }
 
+  /**
+   * Change the status of an active BackupEntry
+   * @param {BackupEntry} backupEntry
+   * @param {BackupStatus} status
+   */
   changeBackupEntryStatus = (backupEntry: BackupEntry, status: BackupStatus) => {
     const { backupList } = this.state
     let index = null
@@ -108,6 +128,9 @@ class App extends React.Component<Props, State> {
     this.setState({ backupList })
   }
 
+  /**
+   * Remove all BackupEntry
+   */
   removeAllBackupEntries = () => {
     this.setState({ backupList: [] })
   }
