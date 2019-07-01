@@ -53,7 +53,7 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
       }
     }).catch(err => {
       console.log('Error while using cache: ' + err)
-      backend.getNodeContainers().then(res => resolve(res)).catch(err => reject(err))
+      backend.getNodeContainers(nodeId).then(res => resolve(res)).catch(err => reject(err))
     })
   })
 }
