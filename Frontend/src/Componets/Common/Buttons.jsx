@@ -13,7 +13,6 @@ type Props = {
 
 function Buttons (props: Props) {
   const { text, icon, trailingIcon, className, onClick } = props
-
   return (
     <Button
       icon={icon}

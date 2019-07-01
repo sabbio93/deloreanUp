@@ -15,7 +15,7 @@ type Props = {
 }
 
 type State = {
-  containers: Array
+  containers: Array<mixed> // Mixed should be replaced with a type Container that has all the properties of a container
 }
 
 class ContainerList extends Component <Props, State> {

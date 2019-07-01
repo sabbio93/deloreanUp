@@ -56,7 +56,7 @@ class ContainerBackup extends Component<Props, State> {
     const backupToStart = this.props.backupList.filter(backupEntry => backupEntry.status === 'none')
 
     if (backupToStart.length > 0) {
-      this.setState({ reduced: false });
+      this.setState({ reduced: false })
     }
 
     backupToStart.map(backupEntry => {
