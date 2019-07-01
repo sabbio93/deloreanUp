@@ -1,9 +1,24 @@
 
-@import "variables";
+@import 'variables';
 
 // Material components
-@import "@material/react-button/index.scss";
-@import "@material/react-typography/index.scss";
+@import '@material/react-typography/index.scss';
 @import '@material/react-material-icon/index.scss';
+@import '@material/react-top-app-bar/index.scss';
+@import '@material/react-layout-grid/index.scss';
+@import '@material/react-list/index.scss';
+@import '@material/react-button/index.scss';
+@import '@material/animation/variables';
+@import '@material/animation/functions';
+@import '@material/react-fab/index.scss';
+@import '@material/react-dialog/index.scss';
+@import '@material/react-linear-progress/index.scss';
 
-@import "default";
+@import 'default';
+
+// Custom components
+@import 'components/app-bar';
+@import 'components/node-list';
+@import 'components/container-list';
+@import 'components/container-dialog';
+@import 'components/backup-dialog';

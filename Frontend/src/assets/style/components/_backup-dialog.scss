@@ -1,0 +1,198 @@
+
+.backup-dialog-wrapper {
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  right: 24px;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  max-height: 0;
+  background-color: #ffffff;
+  height: 0;
+  opacity: 0;
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+  &.open {
+    max-height: 400px;
+    height: auto;
+    opacity: 1;
+  }
+
+  .backup-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 24px 8px 24px;
+
+    .title {
+
+      h2 {
+        margin: 8px 0;
+      }
+    }
+
+    .actions {
+
+      .action {
+        padding: 4px 4px;
+        border-radius: 4px;
+        margin-top: 4px;
+        color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+        cursor: pointer;
+
+        &:hover {
+          color: #000;
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+        &:active {
+          color: #000;
+          background-color: rgba(0, 0, 0, 0.12);
+        }
+
+        &.disabled {
+          cursor: default;
+          opacity: 0.6;
+
+          &:hover {
+            color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+            background-color: transparent;
+          }
+          &:active {
+            color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .backup-dialog-content {
+    padding: 8px 24px 32px 24px;
+    transition-duration: .5s, 1s;
+    transition-property: height, width;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    max-height: 336px;
+    overflow-y: auto;
+    width: auto;
+    opacity: 1;
+
+    &.reduced {
+      transition-duration: .5s, 1s;
+      transition-property: height, width;
+      transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+      padding: 0;
+      max-height: 0;
+      width: 340px;
+      opacity: 0;
+    }
+
+    .delorean-table {
+
+      td, th {
+        font-size: 0.875rem !important;
+        font-weight: 300 !important;
+        padding: 8px 16px !important;
+      }
+
+      .backup-dialog-entry-progress {
+        position: relative;
+
+        .progress-bar {
+          position: absolute;
+          margin-top: 8px;
+        }
+      }
+
+      .action {
+        padding: 2px 4px;
+        border-radius: 4px;
+        color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+        cursor: pointer;
+
+        &:hover {
+          color: #000;
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+        &:active {
+          color: #000;
+          background-color: rgba(0, 0, 0, 0.12);
+        }
+
+        &.disabled {
+          cursor: default;
+          opacity: 0.6;
+
+          &:hover {
+            color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+            background-color: transparent;
+          }
+          &:active {
+            color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .backup-status {
+      &.none {
+        color: $theme-red;
+      }
+      &.running {
+        color: $theme-yellow;
+      }
+      &.done {
+        color: $theme-green;
+      }
+    }
+  }
+}
+
+.backup-result-dialog {
+  @include mdc-dialog-max-width(720px, 16px);
+  z-index: 110;
+
+  .delorean-table {
+
+    th {
+
+    }
+
+    td {
+      font-weight: 300;
+      font-size: 0.875rem !important;
+      padding: 8px 16px !important;
+    }
+
+    td, th {
+      font-size: 0.875rem !important;
+      padding: 8px 16px !important;
+    }
+
+    .backup-name-columns {
+      width: 20%;
+    }
+
+    .container-name-columns {
+      width: 25%;
+    }
+
+    .hostname-columns {
+      width: 36%;
+    }
+
+    .created-at-columns {
+      width: 19%;
+    }
+  }
+}
+
+@media (min-width: 752px) {
+  max-width: 720px;
+}
+
+@media (max-width: 752px) {
+  max-width: calc(100vw - 32px);
+}
+

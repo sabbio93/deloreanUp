@@ -1,0 +1,43 @@
+
+.container-dialog {
+  @include mdc-dialog-max-width(720px, 16px);
+  z-index: 110;
+
+  .container-view {
+    font-size: 0.875rem;
+
+    .mdc-layout-grid {
+      padding: 0;
+    }
+
+    .general-info {
+
+      .info {
+        margin: 5px 0;
+
+        .info-name {
+          font-weight: 500;
+        }
+
+        .info-value {
+          font-weight: 300;
+          position: relative;
+
+          .run {
+            color: $theme-green;
+          }
+
+          .run, .off {
+            position: absolute;
+          }
+        }
+      }
+    }
+
+    .mounts-info {
+      .heading {
+        margin: 40px 0 20px 0;
+      }
+    }
+  }
+}

@@ -6,33 +6,108 @@ html, body {
 
 
 .app {
-  text-align: center;
 
-  .header {
-    position: relative;
-
-    .header-title, .header-logo {
-      display: inline-block;
-    }
-
-    .header-title {
-      margin-left: 88px;
-    }
-
-    .header-logo {
-      width: 64px;
-      margin-right: 24px;
-      position: absolute;
-      top: calc(50% - 34px);
-    }
+  .main-content {
+    padding-top: $main-content-top-padding;
   }
 
-  .btn-secondary {
+  /*.btn-secondary {
     margin-left: 24px;
     @include mdc-button-filled-accessible($mdc-theme-secondary)
-  }
+  }*/
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
 }
 
 h1 {
   color: $mdc-theme-primary;
+}
+
+.delorean-table-wrapper {
+  overflow-x: auto;
+}
+
+.delorean-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  tr {
+    border-bottom: 1px solid $theme-table-border-color;
+    height: 52px;
+    line-height: 52px;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  th, td {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.00937em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    line-height: 1rem;
+    margin: 0;
+    padding: 8px 0;
+    list-style-type: none;
+    color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+  }
+}
+
+.delorean-table.modal-table {
+  td {
+    font-weight: 300;
+  }
+}
+
+.delorean-table.main-table {
+  th {
+    font-weight: bold;
+  }
+
+  td:first-of-type {
+    padding-left: 16px;
+  }
+
+  td:last-of-type {
+    padding-right: 16px;
+  }
+}
+
+.delorean-table.hoverable {
+
+  tbody {
+    tr {
+      transition: opacity 15ms linear, background-color 15ms linear;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+      &:active {
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    tr.active {
+      background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.16));
+      &:hover {
+        background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.24));
+      }
+      &:active {
+        background-color: var(--mdc-theme-primary, rgba(255, 179, 0, 0.36));
+      }
+    }
+  }
 }
