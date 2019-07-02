@@ -29,7 +29,7 @@ const updateNodesContainersCache = (nodeId) => {
 export function getNodes (): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     cache.getNodes().then(res => {
-      if (res.data && res.data.length !== 0) {
+      if (res.data.nodes && res.data.nodes.length !== 0) {
         resolve(res)
       } else {
         updateNodesCache()
@@ -45,7 +45,7 @@ export function getNodes (): Promise<ResponseObject> {
 export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     cache.getNodeContainers(nodeId).then(res => {
-      if (res.data && res.data.length !== 0) {
+      if (res.data.containers && res.data.containers.length !== 0) {
         resolve(res)
       } else {
         updateNodesContainersCache(nodeId)
@@ -77,7 +77,7 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
 export function getNodeContainerMounts (nodeId: string, containerId: string): Promise<ResponseObject> {
   return new Promise((resolve, reject) => {
     cache.getNodeContainerMounts(nodeId, containerId).then(res => {
-      if (res.data && res.data.length !== 0) {
+      if (res.data.mounts && res.data.mounts.length !== 0) {
         resolve(res)
       } else {
         updateNodesContainersCache(nodeId)

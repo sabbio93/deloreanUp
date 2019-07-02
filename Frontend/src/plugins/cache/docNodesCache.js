@@ -107,7 +107,11 @@ export function getNodes (): Promise<ResponseObject> {
     cacheUtility.getDatabaseConnection(DB_NAME, TABLE_NAME, TABLE_KEY)
       .then(connection => {
         let result = connection.store.getAll()
-        result.onsuccess = (event) => resolveDatabaseOperation(resolve, event.target.result, response)
+        result.onsuccess = (event) => {
+          let successResult = { }
+          successResult.nodes = event.target.result
+          resolveDatabaseOperation(resolve, successResult, response)
+        }
         result.onerror = (event) => rejectDatabaseOperation(reject, event.type, response)
       }).catch(error => rejectDatabaseOperation(reject, error, response))
   })
@@ -127,7 +131,9 @@ export function getNodeContainers (nodeId: string): Promise<ResponseObject> {
         let currentNode = connection.store.get(nodeId)
         currentNode.onsuccess = (event) => {
           if (event.target.result) {
-            resolveDatabaseOperation(resolve, event.target.result.containers, response)
+            let successResult = { }
+            successResult.containers = event.target.result.containers
+            resolveDatabaseOperation(resolve, successResult, response)
           } else {
             resolveDatabaseOperation(resolve, [], response)
           }
@@ -148,8 +154,8 @@ export function getNodeContainerById (nodeId: string, containerId: string): Prom
     let response: ResponseObject = { }
 
     getNodeContainers(nodeId).then(result => {
-      if (result.data && result.data.length !== 0) {
-        let container = result.data.filter(cont => cont.Id === containerId)
+      if (result.data.containers && result.data.containers.length !== 0) {
+        let container = result.data.containers.filter(cont => cont.Id === containerId)[0]
         resolveDatabaseOperation(resolve, container, response)
       } else {
         resolveDatabaseOperation(resolve, [], response)
@@ -170,7 +176,9 @@ export function getNodeContainerMounts (nodeId: string, containerId: string): Pr
 
     getNodeContainerById(nodeId, containerId).then(result => {
       if (result.data && result.data.length !== 0) {
-        resolveDatabaseOperation(resolve, result.data.shift().Mounts, response)
+        let successResult = { }
+        successResult.mounts = result.data.shift().Mounts
+        resolveDatabaseOperation(resolve, successResult, response)
       } else {
         resolveDatabaseOperation(resolve, [], response)
       }
