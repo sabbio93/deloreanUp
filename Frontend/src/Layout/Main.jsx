@@ -19,7 +19,8 @@ type Props = {
   handleBackupListChange: Function,
   changeBackupEntryStatus: Function,
   removeAllBackupEntries: Function,
-  toggleDialogBackupResult: Function
+  toggleDialogBackupResult: Function,
+  handleRefreshCache: Function
 }
 
 function Main (props: Props) {
@@ -34,12 +35,13 @@ function Main (props: Props) {
     handleBackupListChange,
     changeBackupEntryStatus,
     removeAllBackupEntries,
-    toggleDialogBackupResult
+    toggleDialogBackupResult,
+    handleRefreshCache
   } = props
 
   return (
     <div className='app'>
-      <AppBar title={title} logo={logo} />
+      <AppBar title={title} logo={logo} handleRefreshCache={handleRefreshCache} />
       <div className='main-content'>
         <Grid>
           <Row>

@@ -7,7 +7,7 @@ import Dialog, {
   DialogButton
 } from '@material/react-dialog'
 import type { DialogContainer } from '../../types'
-import { getNodeContainerById } from '../../plugins/backendApater/docNodes'
+import { getNodeContainerById } from '../../plugins/docNodes'
 import ContainerView from './ContainerView'
 
 type Props = {

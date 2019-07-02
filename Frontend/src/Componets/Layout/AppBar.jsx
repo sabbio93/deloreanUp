@@ -10,11 +10,12 @@ import MaterialIcon from '@material/react-material-icon'
 
 type Props = {
   title: string,
-  logo: string
+  logo: string,
+  handleRefreshCache: Function
 }
 
 function AppBar (props: Props) {
-  const { title, logo } = props
+  const { title, logo, handleRefreshCache } = props
   return (
     <TopAppBar>
       <TopAppBarRow>
@@ -39,7 +40,7 @@ function AppBar (props: Props) {
               aria-label='refresh page'
               hasRipple
               icon='refresh'
-              onClick={() => console.log('refresh')}
+              onClick={handleRefreshCache}
             />
           </TopAppBarIcon>
         </TopAppBarSection>

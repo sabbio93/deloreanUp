@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { getNodeContainers } from '../../plugins/backendApater/docNodes'
+import { getNodeContainers } from '../../plugins/docNodes'
 import List, {
   ListGroup,
   ListGroupSubheader, ListItem, ListItemText, ListItemMeta

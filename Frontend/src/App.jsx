@@ -9,7 +9,8 @@ import type { DialogContainer, BackupList, BackupEntry, BackupStatus, BackupResu
 import Main from './Layout/Main'
 
 // Plugins
-import { getNodes } from './plugins/backendApater/docNodes'
+import { getNodes } from './plugins/docNodes'
+import { clearCache } from './plugins/cache/docNodesCache'
 
 type Props = {};
 
@@ -21,27 +22,33 @@ type State = {
   backupResultDialog: BackupResultDialog
 };
 
+const DEFAULT_STATE = {
+  title: 'Delorean Up', // Title of application
+  nodes: [], // List of docNode entities
+  dialogContainer: { // Object with data to open the container dialog
+    isOpen: false,
+    nodeId: null,
+    containerId: null
+  },
+  backupList: [], // list of the active container backuping
+  backupResultDialog: { // Object with data to open the backup result dialog
+    isOpen: false,
+    backupResults: []
+  }
+}
+
 class App extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
-    this.state = {
-      title: 'Delorean Up', // Title of application
-      nodes: [], // List of docNode entities
-      dialogContainer: { // Object with data to open the container dialog
-        isOpen: false,
-        nodeId: null,
-        containerId: null
-      },
-      backupList: [], // list of the active container backuping
-      backupResultDialog: { // Object with data to open the backup result dialog
-        isOpen: false,
-        backupResults: []
-      }
-    }
+    this.state = DEFAULT_STATE
   }
 
   componentDidMount () {
-    // Get nodes list from server
+    // Load nodes list
+    this.loadNodes()
+  }
+
+  loadNodes = () => {
     getNodes()
       .then(response => {
         if (response.success) {
@@ -135,6 +142,16 @@ class App extends React.Component<Props, State> {
     this.setState({ backupList: [] })
   }
 
+  handleRefreshCache = () => {
+    // Set state to the default values
+    this.setState(DEFAULT_STATE)
+    clearCache()
+      .then(result => {
+        console.log(result)
+        this.loadNodes()
+      })
+  }
+
   render () {
     const { title, nodes, dialogContainer, backupList, backupResultDialog } = this.state
 
@@ -152,6 +169,7 @@ class App extends React.Component<Props, State> {
           changeBackupEntryStatus={this.changeBackupEntryStatus}
           removeAllBackupEntries={this.removeAllBackupEntries}
           toggleDialogBackupResult={this.toggleDialogBackupResult}
+          handleRefreshCache={this.handleRefreshCache}
         />
       </div>
     )

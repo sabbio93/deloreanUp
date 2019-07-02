@@ -5,7 +5,7 @@ import MaterialIcon from '@material/react-material-icon'
 import type { BackupEntry, BackupList, BackupResult, BackupStatus } from '../../types'
 import LinearProgress from '@material/react-linear-progress'
 
-import { postContainerBackup } from '../../plugins/backendApater/docNodes'
+import { postContainerBackup } from '../../plugins/docNodes'
 
 type Props = {
   backupList: BackupList,
