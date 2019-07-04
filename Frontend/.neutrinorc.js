@@ -3,10 +3,12 @@ const react = require('@neutrinojs/react');
 const jest = require('@neutrinojs/jest');
 const style = require('@neutrinojs/style-loader');
 const htmlTemplate = require('@neutrinojs/html-template');
+const path = require('path')
 
 module.exports = {
   options: {
     root: __dirname,
+    output: path.join(__dirname, '..', '/Backend/build_frontend')
   },
   use: [
     (neutrino) => {

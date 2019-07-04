@@ -88,3 +88,5 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Frontend build inside Backend
+build_frontend/*
