@@ -6,7 +6,7 @@ export type DialogContainer = {
   containerId: string | null
 }
 
-export type BackupStatus = 'none' | 'running' | 'done'
+export type BackupStatus = 'none' | 'running' | 'done' | 'error'
 
 export type BackupEntry = {
   nodeId: string,

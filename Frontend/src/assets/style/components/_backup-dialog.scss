@@ -136,10 +136,10 @@
     }
 
     .backup-status {
-      &.none {
+      &.error {
         color: $theme-red;
       }
-      &.running {
+      &.running, &.none {
         color: $theme-yellow;
       }
       &.done {

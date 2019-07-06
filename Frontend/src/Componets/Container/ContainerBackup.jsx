@@ -77,7 +77,11 @@ class ContainerBackup extends Component<Props, State> {
           // Update the overallStatus because a backup is ended
           this.computeCurrentState()
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          changeBackupEntryStatus(backupEntry, 'error')
+          alert(err.toString())
+        })
     })
   }
 
@@ -110,7 +114,7 @@ class ContainerBackup extends Component<Props, State> {
   onEntryDismiss = (backupEntry: BackupEntry, index: number) => {
     const { handleBackupListChange } = this.props
     // Can dismiss a BackupEntry only if the status is done
-    if (backupEntry.status === 'done') {
+    if (backupEntry.status === 'done' || backupEntry.status === 'error') {
       handleBackupListChange(backupEntry, index)
     }
   }
@@ -200,13 +204,13 @@ class ContainerBackup extends Component<Props, State> {
                   <td>
                     <MaterialIcon
                       title='Backup entry results'
-                      className={backupEntry.status === 'done' ? 'action' : 'action disabled'}
+                      className={backupEntry.status === 'done' || backupEntry.status === 'error' ? 'action' : 'action disabled'}
                       icon='more_vert'
                       onClick={() => this.onBackupEntryResultClick(backupEntry.nodeId, backupEntry.containerId)}
                     />
                     <MaterialIcon
                       title='Remove entry'
-                      className={backupEntry.status === 'done' ? 'action' : 'action disabled'}
+                      className={backupEntry.status === 'done' || backupEntry.status === 'error' ? 'action' : 'action disabled'}
                       icon='close'
                       onClick={() => this.onEntryDismiss(backupEntry, index)}
                     />
