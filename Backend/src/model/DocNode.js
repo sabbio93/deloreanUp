@@ -12,7 +12,7 @@ class DocNode {
    * @param {string} apiVersion - version of the doc-node api installed in the node
    */
   constructor (id, ip, port, protocol = 'http', apiVersion = '1.0.0') {
-    this.id = id
+    this.id = id.toString()
     this.ip = ip
     this.port = port
     this.protocol = protocol

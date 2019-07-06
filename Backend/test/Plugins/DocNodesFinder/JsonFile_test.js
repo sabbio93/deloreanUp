@@ -1,4 +1,4 @@
-import JsonFile from '../../../src/Plugins/DocNodesFinder/JsonFile'
+import JsonFile from '../../../src/plugins/docNodesFinder/jsonFile'
 import DocNode from '../../../src/model/DocNode'
 import fs from 'fs'
 

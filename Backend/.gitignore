@@ -90,3 +90,6 @@ typings/
 
 # Frontend build inside Backend
 build_frontend/*
+
+# config file
+/configs.json

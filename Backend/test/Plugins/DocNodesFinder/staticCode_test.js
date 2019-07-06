@@ -1,4 +1,4 @@
-import * as staticCode from '../../../src/Plugins/DocNodesFinder/staticCode'
+import * as staticCode from '../../../src/plugins/docNodesFinder/staticCode'
 
 describe('simple', () => {
   it('should be sane', () => {

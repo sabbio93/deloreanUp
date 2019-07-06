@@ -1,0 +1,4 @@
+{
+  "docNodesMethod": "<mehtod>", // one of [static, json, consul]
+  "docNodesList": [<list_of_doc_nodes_properties>] // example { "id": "1", "ip": "127.0.0.1", "port": 5555 }
+}

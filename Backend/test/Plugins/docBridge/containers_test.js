@@ -1,4 +1,4 @@
-import * as containers from '../../../src/Plugins/docBridge/containers'
+import * as containers from '../../../src/plugins/docBridge/containers'
 import DocNode from '../../../src/model/DocNode'
 
 const localNode = new DocNode('1', '127.0.0.1', 5555)

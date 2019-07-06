@@ -2,24 +2,14 @@
  * Collection file for the {@link DocNode} object, this collection contains methods to operate on a collection (a group)
  * of {@link DocNode} object
  */
-import * as staticCode from 'Plugins/DocNodesFinder/staticCode'
-
-/**
- * Method to retrive the configured plugins to find the nodes
- * @return {Array} - return an array of plugin
- */
-function getConfiguredPlugins () {
-  return [staticCode]
-}
+import { getConfiguredDocNodes } from 'plugins/docNodesFinder/index'
 
 /**
  * Method to get all the nodes available from the configured plugins
  * @return {Array<Object>} - return an array of {@link DocNode} object
  */
 function getAllNodes () {
-  const nodes = []
-  getConfiguredPlugins().map(plugin => plugin.getAllNodes().map(node => nodes.push(node)))
-  return nodes
+  return getConfiguredDocNodes()
 }
 
 /**
@@ -29,7 +19,11 @@ function getAllNodes () {
  */
 function getNodeById (id) {
   const nodes = getAllNodes()
-  const node = nodes.filter(node => node.id === id)
+  const node = nodes.filter(node => {
+    if (node.id === id) {
+      return node
+    }
+  })
   if (node.length === 0) {
     return null
   } else {
@@ -38,7 +32,6 @@ function getNodeById (id) {
 }
 
 export {
-  getConfiguredPlugins,
   getAllNodes,
   getNodeById
 }
