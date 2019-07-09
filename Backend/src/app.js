@@ -23,8 +23,10 @@ app.use(express.static(path.join(__dirname, '..', 'build_frontend')))
 const indexRouter = require('routes/index')
 const docNodesRouter = require('routes/api/docNodes')
 
+const apiVersion = '1.0.0'
+
 app.use('/', indexRouter)
-app.use('/api/v' + process.env.npm_package_version + '/nodes', docNodesRouter)
+app.use('/api/v' + apiVersion + '/nodes', docNodesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

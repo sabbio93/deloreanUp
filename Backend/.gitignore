@@ -92,4 +92,4 @@ typings/
 build_frontend/*
 
 # config file
-/configs.json
+config.json

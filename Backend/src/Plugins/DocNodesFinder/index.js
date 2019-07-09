@@ -8,7 +8,7 @@ import fs from 'fs'
  * @param {string} configPath - path of the configs file (name included) (default: <root>/Backend/config.js)
  * @return {Array<DocNode>} - return a list of {@link DocNode} object
  */
-function getConfiguredDocNodes (configPath = path.join(__dirname, '..', 'configs.json')) {
+function getConfiguredDocNodes (configPath = path.join(__dirname, '..', 'config.json')) {
   const rawdata = fs.readFileSync(configPath)
   const json = JSON.parse(rawdata)
 
