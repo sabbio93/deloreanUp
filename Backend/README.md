@@ -68,5 +68,5 @@ docker build -t delorean-up .
 ```
 Secondly, run the container:
 ```
-docker run -d --name delorean-up -p 3000:3000 -v $(pwd)/config.json:app/config.json delorean-up
+docker run -d --name delorean-up -p 3000:3000 delorean-up
 ```
