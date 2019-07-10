@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  delorean_up:
+    image: "ale8193/delorean-up"
+    container_name: "delorean-up"
+    ports:
+      - "0.0.0.0:3000:3000"
+    volumes:
+      - type: "bind"
+        source: "../config.json"
+        target: "/app/config.json"
+
+  webdav:
+    image: "morrisjobke/webdav"
+    container_name: "webdav"
+    ports:
+      - "0.0.0.0:8888:80"
+    environment:
+      - USERNAME=${WEBDAV_USERNAME:-admin}
+      - PASSWORD=${WEBDAV_PASSWORD:-admin}
