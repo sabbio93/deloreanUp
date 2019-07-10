@@ -8,7 +8,7 @@ services:
       - "0.0.0.0:3000:3000"
     volumes:
       - type: "bind"
-        source: "../config.json"
+        source: "./config.json"
         target: "/app/config.json"
 
   webdav:
