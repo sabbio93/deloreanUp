@@ -2,6 +2,18 @@
 import { NodesApi } from 'delorean-up-api'
 
 /**
+ * Method to get the current host url used to change (in a hard way) the url used by swagger api to perform the requests
+ * @return {string} the host url
+ */
+function getHostUrl () {
+  const hostname = window.location.hostname
+  const port = window.location.port
+  const protocol = window.location.protocol
+  const basePath = '/api/v1.0.0'
+  return `${protocol}//${hostname}:${port}${basePath}`
+}
+
+/**
  * Standard object containing the response from the api, parameters:
  * - @type {boolean} success - `true` when the response doesn't contain errors otherwise `false`
  * - @type {Object} data - object containing the response either in case of errors or success
@@ -28,6 +40,8 @@ const specialErrorStatus = [
  * @type {NodesApi}
  */
 const nodesApi = new NodesApi()
+
+nodesApi.apiClient.basePath = getHostUrl()
 
 /**
  * Method to call on the backend the GET route `/api/{version}/nodes` that return the list of doc-nodes
