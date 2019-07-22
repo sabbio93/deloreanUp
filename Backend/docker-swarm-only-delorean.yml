@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  delorean_up:
+    image: "ale8193/delorean-up"
+    container_name: "delorean-up"
+    ports:
+    - "0.0.0.0:3333:3000"
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: "on-failure"
+    configs:
+    - source: "delorean_up_config"
+      target: "/app/config.json"
+
+configs:
+  delorean_up_config:
+    file: "./config.json"
+
+
